@@ -1,0 +1,55 @@
+@use './variables' as *;
+
+html {
+  font-size: 16px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $font-stack;
+  font-size: 1rem; // 16px
+  line-height: 1.6;
+  color: $text-color;
+  background-color: $background-color;
+}
+
+h1 {
+  font-size: 2.5rem; // 40px
+}
+h2 {
+  font-size: 2rem; // 32px
+}
+h3 {
+  font-size: 1.5rem;
+}
+h4,
+h5,
+h6 {
+  font-size: 1.25rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $font-heading;
+  font-weight: $font-weight-bold;
+  margin-bottom: 1rem;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}

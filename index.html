@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flametree - AI Customer Engagement Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Commissioner:wght@100..900&family=Space+Grotesk:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        font-size: 16px; /* 1rem = 16px */
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Space Grotesk', sans-serif;
+        background-color: #fff;
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 120rem; /* 1920px */
+        margin: 0 auto;
+        padding: 0 2.5rem; /* 40px */
+      }
+
+      .header {
+        padding: 1rem 0;
+        position: relative;
+        z-index: 1000;
+      }
+
+      .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .nav {
+        display: flex;
+        gap: 2rem;
+        align-items: center;
+      }
+
+      .nav a {
+        text-decoration: none;
+        color: #000;
+        font-weight: 400;
+        transition: color 0.3s ease;
+        font-size: 1.125rem;
+      }
+
+      .nav a:hover {
+        color: #ff6b35;
+      }
+
+      .auth-buttons {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+      }
+
+      .login-btn {
+        background: #e3e3e34d;
+        border: none;
+        border-radius: 12px;
+        color: #000;
+        font-weight: 500;
+        cursor: pointer;
+        padding: 1rem 1.5rem;
+      }
+
+      .signup-btn {
+        background: #000;
+        color: white;
+        border: none;
+        padding: 1rem 1.5rem;
+        border-radius: 12px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+
+      .signup-btn:hover {
+        background: #222;
+      }
+
+      .mobile-menu {
+        display: none;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+
+      .hero {
+        height: calc(100vh - 110px); /* 100vh - header height */
+        position: relative;
+      }
+
+      .hero-content {
+        position: absolute;
+        bottom: 2.5rem;
+        left: 2.5rem;
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .content-box {
+        background: rgba(255, 255, 255, 0.6);
+        border: 1px solid #fff;
+        padding: 2rem 2.5rem 2rem 2.5rem;
+        border-radius: 14px;
+        max-width: 587px;
+        max-height: 270px;
+      }
+
+      .content-text {
+        color: #333;
+        font-size: 20px;
+        line-height: 32px;
+        margin-bottom: 34px;
+      }
+
+      .cta-buttons {
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        padding: 0.75rem 1.5rem;
+        border-radius: 12px;
+        font-weight: 500;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 1rem;
+        border: 1px solid #fff;
+      }
+
+      .btn-primary {
+        background: white;
+        color: #333;
+      }
+
+      .btn-primary:hover {
+        background: #f8f9fa;
+        transform: translateY(-2px);
+      }
+
+      .btn-secondary {
+        background: rgba(255, 255, 255, 0.4);
+        color: #333;
+      }
+
+      .btn-secondary:hover {
+        transform: translateY(-2px);
+      }
+
+      .hero-container {
+        display: flex;
+        flex-direction: column;
+        display: flex;
+        align-items: stretch;
+        height: 100%;
+      }
+
+      .hero-background {
+        flex: 1;
+        padding: 4rem 0;
+        background-image: url('/assets/images/bg-hero.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        border-radius: 24px;
+        position: relative;
+        max-height: 1000px;
+        overflow: hidden;
+      }
+
+      .mask-container {
+        position: absolute;
+        z-index: 5;
+
+        container-type: inline-size;
+        container-name: mask;
+      }
+
+      .mask-svg {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+        display: block;
+      }
+
+      .left-mask,
+      .right-mask {
+        position: absolute;
+        width: 40%;
+        height: auto;
+      }
+
+      .left-mask {
+        top: -0.1rem;
+      }
+
+      .right-mask {
+        bottom: 0;
+        right: 0;
+      }
+
+      .mask-text {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        line-height: 1.1;
+        font-weight: 700;
+        z-index: 6;
+        overflow-wrap: anywhere;
+        max-width: 100%;
+        max-height: 100%;
+        white-space: pre-line;
+
+        /* Адаптивный шрифт с Container Queries */
+        font-size: 13cqw; /* 5% от ширины контейнера */
+
+        /* Адаптивные отступы относительно контейнера */
+        padding: 2cqw;
+      }
+      /* Верхний текст — выравнивание влево */
+      .left-mask .mask-text {
+        /* padding: 20px; */
+        align-items: flex-start;
+        text-align: left;
+      }
+
+      /* Нижний текст — выравнивание вправо и вниз */
+      .right-mask .mask-text {
+        align-items: flex-end;
+        justify-content: flex-end;
+        text-align: right;
+      }
+
+      @media (max-width: 768px) {
+        .nav {
+          display: none;
+        }
+
+        .mobile-menu {
+          display: block;
+        }
+
+        .login-btn {
+          display: none;
+        }
+
+        .cta-buttons {
+          flex-direction: column;
+          gap: 0.75rem;
+        }
+
+        .btn {
+          padding: 0.875rem 1.5rem;
+          text-align: center;
+        }
+
+        .left-mask {
+          width: 60%;
+          height: auto;
+        }
+
+        .right-mask {
+          width: 60%;
+          height: auto;
+        }
+      }
+
+      @media (max-width: 480px) {
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="container">
+        <div class="header-content">
+          <a href="#" class="logo"><img src="/assets/images/logo.svg" alt="Logo" /></a>
+
+          <nav class="nav">
+            <a href="#">platform</a>
+            <a href="#">solutions</a>
+            <a href="#">pricing</a>
+            <a href="#">resources</a>
+            <a href="#">about</a>
+          </nav>
+
+          <div class="auth-buttons">
+            <button class="login-btn">Login</button>
+            <button class="signup-btn">Sign Up</button>
+          </div>
+
+          <button class="mobile-menu">☰</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container hero-container">
+        <div class="hero-background">
+          <!-- Content -->
+          <div class="hero-content">
+            <div class="content-box">
+              <p class="content-text">
+                Boost revenue and operational efficiency with AI agents that drive dynamic, two-way
+                conversations — uncovering customer needs, adapting in real time and converting at
+                every stage of the journey.
+              </p>
+
+              <div class="cta-buttons">
+                <a href="#" class="btn btn-primary">Try for free</a>
+                <a href="#" class="btn btn-secondary">Get a demo</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- SVG Masks with text -->
+          <div class="mask-container left-mask">
+            <img src="/assets/images/hero-left-mask.svg" alt="" class="mask-svg" />
+            <div class="mask-text">AI CUSTOMER<br />ENGAGEMENT<br />PLATFORM</div>
+          </div>
+
+          <div class="mask-container right-mask">
+            <img src="/assets/images/hero-right-mask.svg" alt="" class="mask-svg" />
+            <div class="mask-text">BUILT<br />FOR FINTECH</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

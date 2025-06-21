@@ -1,0 +1,200 @@
+@use '../variables' as *;
+@use '../mixins' as *;
+
+.header {
+  padding: 1rem 0;
+  background-color: #fff;
+  position: relative;
+  z-index: 10;
+
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  &__logo {
+    font-weight: 700;
+    font-size: 1.25rem;
+  }
+
+  &__nav ul {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+
+    a {
+      font-weight: 400;
+      font-size: 1rem;
+      color: #111;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    gap: 0.75rem;
+
+    .btn {
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
+      border-radius: 0.5rem;
+      font-weight: 500;
+    }
+
+    .btn--light {
+      background: #f4f4f4;
+      color: #111;
+    }
+
+    .btn--dark {
+      background: #111;
+      color: #fff;
+    }
+  }
+}
+
+// .hero {
+//   padding: 4rem 0;
+//   background-color: #fff;
+
+//   &__container {
+//     position: relative;
+//     z-index: 1;
+//   }
+
+//   &__inner {
+//     background: linear-gradient(135deg, #ff9900 0%, #ff5e00 50%, #fcb045 100%);
+//     border-radius: 2rem;
+//     padding: 4rem;
+//     position: relative;
+//     overflow: hidden;
+//   }
+
+//   &__title {
+//     font-size: 3rem;
+//     font-weight: 700;
+//     line-height: 1.1;
+//     text-transform: uppercase;
+//     max-width: 15ch;
+//     margin-bottom: 2rem;
+//   }
+
+//   &__highlight {
+//     background: #fff;
+//     padding: 1.5rem;
+//     border-radius: 1rem;
+//     max-width: 32rem;
+//     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+
+//     p {
+//       font-size: 1rem;
+//       line-height: 1.5;
+//       margin-bottom: 1rem;
+//     }
+
+//     .hero__buttons {
+//       display: flex;
+//       gap: 1rem;
+
+//       .btn {
+//         padding: 0.75rem 1.5rem;
+//         font-size: 0.875rem;
+//         border-radius: 0.5rem;
+//         font-weight: 500;
+//       }
+
+//       .btn--light {
+//         background: #fff;
+//         color: #111;
+//         border: 1px solid #ddd;
+//       }
+
+//       .btn--peach {
+//         background: #f7b26c;
+//         color: #111;
+//       }
+//     }
+//   }
+
+//   &__label {
+//     font-size: 2rem;
+//     font-weight: 700;
+//     text-transform: uppercase;
+//     position: absolute;
+//     bottom: 2rem;
+//     right: 2rem;
+//     color: #111;
+//     z-index: 1;
+//   }
+// }
+
+.hero {
+  background: #fff;
+  margin: 40px;
+  background-image: url('/assets/images/bg-hero.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 525px;
+  position: relative;
+  border-radius: 2rem;
+
+  //   &__mask {
+  //     position: absolute;
+  //     pointer-events: none;
+  //     z-index: 2;
+  //   }
+
+  &__mask--left {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 308px;
+    width: 594px;
+  }
+
+  &__mask--right {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 300px;
+  }
+
+  //   &__container {
+  //     position: relative;
+  //     z-index: 3;
+  //     display: flex;
+  //     align-items: flex-start;
+  //     justify-content: space-between;
+  //     padding: 6rem 0;
+  //     flex-wrap: wrap;
+  //   }
+
+  &__left-text {
+    position: absolute;
+    top: -1px;
+    left: 0;
+    height: 300px;
+  }
+
+  //   &__right-text {
+  //     text-align: right;
+  //     flex: 1 1 40%;
+  //   }
+
+  &__title {
+    font-size: 80px;
+    font-weight: 600;
+    text-transform: uppercase;
+    line-height: 80px;
+    padding-left: 39px;
+  }
+
+  //   &__label {
+  //     font-size: 2rem;
+  //     font-weight: 700;
+  //     text-transform: uppercase;
+  //     line-height: 1.1;
+  //   }
+}

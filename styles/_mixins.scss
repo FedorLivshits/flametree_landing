@@ -1,0 +1,26 @@
+@use './variables' as *;
+// Миксин для флексбокса
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Миксин для градиента
+@mixin gradient($from, $to) {
+  background: linear-gradient(to right, $from, $to);
+}
+
+// Миксин для медиа-запросов
+@mixin media($breakpoint) {
+  @if $breakpoint == mobile {
+    @media (max-width: $mobile) {
+      @content;
+    }
+  }
+  @if $breakpoint == tablet {
+    @media (max-width: $tablet) {
+      @content;
+    }
+  }
+}
