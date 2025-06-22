@@ -27,6 +27,11 @@
   line-height: 4rem;
   font-weight: 500;
   margin: 0 0 2.5rem;
+
+  @include tablet {
+    font-size: 2.5rem;
+    line-height: 3rem;
+  }
 }
 
 .cap-text {
@@ -38,7 +43,7 @@
 
   @include mobile {
     margin-inline: auto;
-    font-size: 1.125rem;
+    font-size: 1rem;
   }
 }
 

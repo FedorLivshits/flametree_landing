@@ -27,6 +27,7 @@
 .hero-background {
   flex: 1;
   padding: 4rem 0;
+  border: 1px solid $color-white;
   background-image: url('/assets/images/bg-hero.png');
   background-size: cover;
   background-position: center;
