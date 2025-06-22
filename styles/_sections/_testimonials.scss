@@ -1,0 +1,164 @@
+// ===== TESTIMONIALS CAROUSEL =====
+@use '../variables' as *;
+@use '../mixins' as *;
+
+.testimonials {
+  background: $color-white;
+  @include section-padding(4rem, 6rem);
+}
+
+.t-wrap {
+  @include container(1280px);
+  text-align: center;
+}
+
+.t-eyebrow {
+  @include eyebrow-text;
+  font-size: 0.75rem;
+  color: $color-gray-medium;
+  margin-bottom: 1.4rem;
+}
+
+.t-headline {
+  font-family: $font-family-primary;
+  font-weight: 600;
+  line-height: 1.15;
+  margin-bottom: 3.5rem;
+  color: $color-black;
+  @include clamp-size(2rem, calc(4.5vw + 1rem), 3.3rem);
+}
+
+// Carousel structure
+.t-viewport {
+  padding: 2rem 0;
+  overflow: hidden;
+}
+
+.t-track {
+  display: flex;
+  gap: 2rem;
+  scroll-behavior: smooth;
+  transition: transform $transition-slow;
+
+  @include tablet {
+    gap: 1.25rem;
+  }
+}
+
+// Card styles
+.t-card {
+  flex: 0 0 320px;
+  @include card-base;
+  padding: 2rem 1.75rem;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+
+  @include tablet {
+    flex: 0 0 80vw;
+    padding: 1.75rem 1.5rem;
+  }
+}
+
+.t-company {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0 0 1rem;
+  color: $color-black;
+}
+
+.t-text {
+  font-size: 1rem;
+  line-height: 1.55;
+  color: $color-gray-darker;
+  margin-bottom: 2rem;
+}
+
+.t-author {
+  display: flex;
+  gap: 0.9rem;
+  align-items: center;
+  margin-top: auto;
+
+  img {
+    width: 4.75rem;
+    height: 4.75rem;
+    border-radius: $border-radius-lg;
+    object-fit: cover;
+  }
+}
+
+.t-name {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: $color-black;
+}
+
+.t-role {
+  display: block;
+  font-size: 0.875rem;
+  color: #6e7074;
+  margin-top: 0.1rem;
+}
+
+// Controls
+.t-controls {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+
+  @include tablet {
+    grid-template-columns: auto 1fr auto;
+  }
+}
+
+.t-nav {
+  justify-self: start;
+  display: flex;
+  gap: 0.25rem;
+  margin-top: 2.5rem;
+}
+
+.t-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: $border-radius-lg;
+  border: 2px solid #a0a0ab;
+  background: transparent;
+  cursor: pointer;
+  transition: all $transition-base;
+
+  &:hover {
+    transform: translateY(-2px);
+    border-color: $color-gray-darker;
+  }
+}
+
+// Dots indicator
+.t-dots {
+  margin-top: 1.8rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+
+  @include tablet {
+    justify-content: flex-end;
+  }
+
+  span {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #a0a0ab;
+    opacity: 0.5;
+    transition: all $transition-base;
+
+    &.is-active {
+      border-radius: 2px;
+      opacity: 1;
+      width: 61px;
+    }
+  }
+}

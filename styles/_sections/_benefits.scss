@@ -1,0 +1,70 @@
+// ===== BENEFITS SECTION =====
+@use '../variables' as *;
+@use '../mixins' as *;
+
+.benefits {
+  @include section-padding(4rem, 6rem);
+  background: $color-white;
+}
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 4rem 6rem;
+  @include container(1000px);
+
+  @include tablet {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  @include mobile {
+    gap: 2.5rem;
+  }
+}
+
+.benefit-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  @include tablet {
+    text-align: center;
+    align-items: center;
+  }
+}
+
+.benefit-icon {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 1.5rem;
+  @include flex-center;
+
+  svg {
+    width: 32px;
+    height: 32px;
+    fill: $color-orange;
+  }
+}
+
+.benefit-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: $color-black;
+  margin-bottom: 1rem;
+  line-height: 1.3;
+
+  @include mobile {
+    font-size: 1.125rem;
+  }
+}
+
+.benefit-description {
+  font-size: 1rem;
+  color: #666;
+  line-height: 1.6;
+
+  @include mobile {
+    font-size: 0.875rem;
+  }
+}

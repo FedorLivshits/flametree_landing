@@ -1,0 +1,102 @@
+// ===== DIFFERENCE SECTION =====
+@use '../variables' as *;
+@use '../mixins' as *;
+
+.difference {
+  height: 100vh;
+  max-height: 750px;
+  position: relative;
+  background: $color-gray-darkest;
+  color: #6d727a;
+  overflow: hidden;
+  background-image: url('/assets/images/grid.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  &__subtitle {
+    @include eyebrow-text;
+    margin-bottom: 4rem;
+    margin-top: 5rem;
+  }
+
+  &__headline {
+    @include container(806px);
+    @include responsive-font(2.5rem, 3.5rem, 1.1, 1.15);
+    font-weight: 600;
+    position: relative;
+    z-index: 3;
+    transition: color 0.4s ease;
+    text-align: left;
+  }
+
+  &__inner {
+    position: relative;
+    max-width: 1920px;
+    z-index: 2;
+  }
+
+  // Parallax images
+  &__illus {
+    position: absolute;
+    z-index: 1;
+
+    img {
+      width: 100%;
+      display: block;
+      border-radius: $border-radius-md;
+      filter: grayscale(100%) contrast(1.2);
+      opacity: 0.85;
+    }
+
+    &--l {
+      top: 80%;
+      left: 0%;
+      width: min(28vw, 240px);
+
+      @include tablet {
+        left: 3%;
+        top: 14%;
+        width: 34vw;
+      }
+    }
+
+    &--r {
+      bottom: 750px;
+      right: 0%;
+
+      @include tablet {
+        right: 3%;
+        top: 4%;
+        width: 34vw;
+      }
+    }
+
+    &--b {
+      bottom: 20%;
+      right: 30%;
+      width: min(30vw, 280px);
+
+      @include tablet {
+        right: 8%;
+        bottom: -6%;
+        width: 40vw;
+      }
+    }
+  }
+}
+
+// Headline animation states
+.headline-line {
+  display: block;
+  color: #4b4b4b;
+  transition: color $transition-slow;
+
+  &.is-visible {
+    color: $color-white;
+  }
+
+  &[data-accent='orange'].is-visible {
+    @include gradient-text($color-orange-gradient);
+  }
+}

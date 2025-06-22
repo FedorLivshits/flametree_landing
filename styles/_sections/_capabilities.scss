@@ -1,0 +1,66 @@
+// ===== CAPABILITIES COMPONENT =====
+@use '../variables' as *;
+@use '../mixins' as *;
+
+.capabilities {
+  background: $color-gray-darkest;
+  color: $color-white;
+  padding: clamp(5rem, 12vh, 8rem) 2rem;
+}
+
+.cap-wrap {
+  max-width: 720px;
+
+  @include mobile {
+    text-align: center;
+    margin-inline: auto;
+  }
+}
+
+.cap-eyebrow {
+  @include eyebrow-text;
+  margin-bottom: 4rem;
+}
+
+.cap-title {
+  font-size: 3.5rem;
+  line-height: 4rem;
+  font-weight: 500;
+  margin: 0 0 2.5rem;
+}
+
+.cap-text {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  max-width: 488px;
+  margin-bottom: 3.5rem;
+  color: $color-white;
+
+  @include mobile {
+    margin-inline: auto;
+    font-size: 1.125rem;
+  }
+}
+
+.cap-btn {
+  display: inline-block;
+  background: $color-white;
+  color: $color-black;
+  font-weight: 700;
+  padding: 16px 24px;
+  border-radius: $border-radius-md;
+  font-size: 1rem;
+  text-decoration: none;
+  transition:
+    background 0.25s,
+    transform 0.25s;
+
+  &:hover {
+    background: #f1f1f1;
+    transform: translateY(-2px);
+  }
+
+  @include mobile {
+    margin-inline: auto;
+  }
+}

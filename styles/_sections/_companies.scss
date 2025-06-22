@@ -1,0 +1,73 @@
+// ===== COMPANIES COMPONENT =====
+@use '../variables' as *;
+@use '../mixins' as *;
+
+.companies {
+  background: $color-white;
+  padding: 6.25rem 0 2.5rem 0;
+  text-align: center;
+}
+
+.companies-label {
+  @include gradient-text;
+  font-weight: 700;
+  font-size: 1.25rem;
+
+  &--mobile {
+    margin-bottom: 1.4rem;
+    display: none;
+
+    @include tablet {
+      display: block;
+    }
+  }
+
+  &--desk {
+    display: block;
+
+    @include tablet {
+      display: none;
+    }
+  }
+}
+
+.companies-box {
+  display: flex;
+  gap: 3.5rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 1.75rem $spacing-xl;
+  border: 1px solid #d4d6d8;
+  border-radius: $border-radius-round;
+
+  @include tablet {
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    gap: 2rem;
+  }
+
+  @include mobile {
+    gap: 1.5rem;
+  }
+
+  img {
+    max-width: 120px;
+    height: auto;
+    opacity: 0.68;
+    transition: opacity 0.25s;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    @include tablet {
+      max-width: 110px;
+    }
+
+    @include mobile {
+      max-width: 90px;
+    }
+  }
+}

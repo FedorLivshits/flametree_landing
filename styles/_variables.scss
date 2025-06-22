@@ -1,24 +1,74 @@
-// Шрифты
-$font-stack: 'Space Grotesk', sans-serif;
-$font-heading: 'Space Grotesk', sans-serif;
+// ===== VARIABLES =====
 
-$font-weight-light: 300;
-$font-weight-regular: 400;
-$font-weight-medium: 500;
-$font-weight-semibold: 600;
-$font-weight-bold: 700;
+// Colors
+$color-white: #fff;
+$color-black: #000;
+$color-gray-light: #f8f9fa;
+$color-gray: #e3e3e34d;
+$color-gray-medium: #828390;
+$color-gray-dark: #57535e;
+$color-gray-darker: #333;
+$color-gray-darkest: #1d1d1f;
+$color-orange: #ff6b35;
+$color-orange-gradient: linear-gradient(90deg, #ff9b00, #fe6150);
 
-// Цвета
-$primary-color: #0055ff;
-$secondary-color: #00c6ff;
-$text-color: #333;
-$background-color: #fff;
+// Dark theme colors
+$color-dark-bg: #1c1c1e;
+$color-dark-text: #c4c6c8;
+$color-dark-light: #d9d9d9;
+$color-dark-medium: #7a7d82;
+$color-dark-number: #5a5c66;
 
-// Размеры
-$container-width: 1200px;
-$header-height: 80px;
+// Background gradients
+$bg-gradient-companies: linear-gradient(
+  0deg,
+  rgba(239, 239, 239, 1) 0%,
+  rgba(255, 255, 255, 1) 100%
+);
 
-// Брейкпоинты
-$mobile: 768px;
-$tablet: 1024px;
-$desktop: 1200px;
+// Canvas gradient colors
+$gradient-color-1: #a960ee;
+$gradient-color-2: #ff333d;
+$gradient-color-3: #90e0ff;
+$gradient-color-4: #ffcb57;
+
+// Typography
+$font-family-primary: 'Space Grotesk', sans-serif;
+$font-size-base: 16px;
+$font-size-small: 14px;
+$line-height-base: 1.6;
+
+// Spacing
+$spacing-xs: 0.5rem;
+$spacing-sm: 1rem;
+$spacing-md: 1.5rem;
+$spacing-lg: 2rem;
+$spacing-xl: 2.5rem;
+$spacing-xxl: 4rem;
+
+// Container widths
+$container-max: 120rem; // 1920px
+$container-md: 90rem; // 1440px
+$container-sm: 85rem; // 1280px
+
+// Border radius
+$border-radius-sm: 8px;
+$border-radius-md: 12px;
+$border-radius-lg: 16px;
+$border-radius-xl: 24px;
+$border-radius-round: 1000px;
+
+// Transitions
+$transition-base: 0.3s ease;
+$transition-slow: 0.45s ease;
+
+// Z-index
+$z-index-header: 1000;
+$z-index-mobile-menu: 1998;
+$z-index-mobile-menu-content: 1999;
+
+// Breakpoints
+$breakpoint-mobile: 480px;
+$breakpoint-tablet: 768px;
+$breakpoint-desktop: 990px;
+$breakpoint-large: 1200px;

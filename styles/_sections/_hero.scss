@@ -1,200 +1,173 @@
+// ===== HERO COMPONENT =====
 @use '../variables' as *;
 @use '../mixins' as *;
 
-.header {
-  padding: 1rem 0;
-  background-color: #fff;
+.hero {
+  height: calc(100vh - 110px);
+  max-height: 1040px;
+  margin-top: 88px;
   position: relative;
-  z-index: 10;
 
-  &__container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
-  }
-
-  &__logo {
-    font-weight: 700;
-    font-size: 1.25rem;
-  }
-
-  &__nav ul {
-    display: flex;
-    gap: 1.5rem;
-    list-style: none;
-
-    a {
-      font-weight: 400;
-      font-size: 1rem;
-      color: #111;
-    }
-  }
-
-  &__actions {
-    display: flex;
-    gap: 0.75rem;
-
-    .btn {
-      padding: 0.5rem 1rem;
-      font-size: 0.875rem;
-      border-radius: 0.5rem;
-      font-weight: 500;
-    }
-
-    .btn--light {
-      background: #f4f4f4;
-      color: #111;
-    }
-
-    .btn--dark {
-      background: #111;
-      color: #fff;
-    }
+  @include tablet {
+    min-height: calc(100vh - 70px);
   }
 }
 
-// .hero {
-//   padding: 4rem 0;
-//   background-color: #fff;
+.hero-container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  height: 100%;
 
-//   &__container {
-//     position: relative;
-//     z-index: 1;
-//   }
+  @include tablet {
+    min-height: calc(100vh - 70px);
+  }
+}
 
-//   &__inner {
-//     background: linear-gradient(135deg, #ff9900 0%, #ff5e00 50%, #fcb045 100%);
-//     border-radius: 2rem;
-//     padding: 4rem;
-//     position: relative;
-//     overflow: hidden;
-//   }
-
-//   &__title {
-//     font-size: 3rem;
-//     font-weight: 700;
-//     line-height: 1.1;
-//     text-transform: uppercase;
-//     max-width: 15ch;
-//     margin-bottom: 2rem;
-//   }
-
-//   &__highlight {
-//     background: #fff;
-//     padding: 1.5rem;
-//     border-radius: 1rem;
-//     max-width: 32rem;
-//     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-
-//     p {
-//       font-size: 1rem;
-//       line-height: 1.5;
-//       margin-bottom: 1rem;
-//     }
-
-//     .hero__buttons {
-//       display: flex;
-//       gap: 1rem;
-
-//       .btn {
-//         padding: 0.75rem 1.5rem;
-//         font-size: 0.875rem;
-//         border-radius: 0.5rem;
-//         font-weight: 500;
-//       }
-
-//       .btn--light {
-//         background: #fff;
-//         color: #111;
-//         border: 1px solid #ddd;
-//       }
-
-//       .btn--peach {
-//         background: #f7b26c;
-//         color: #111;
-//       }
-//     }
-//   }
-
-//   &__label {
-//     font-size: 2rem;
-//     font-weight: 700;
-//     text-transform: uppercase;
-//     position: absolute;
-//     bottom: 2rem;
-//     right: 2rem;
-//     color: #111;
-//     z-index: 1;
-//   }
-// }
-
-.hero {
-  background: #fff;
-  margin: 40px;
+.hero-background {
+  flex: 1;
+  padding: 4rem 0;
   background-image: url('/assets/images/bg-hero.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  height: 525px;
+  z-index: 100;
+  border-radius: $border-radius-xl;
   position: relative;
-  border-radius: 2rem;
+  max-height: 1000px;
+  overflow: hidden;
 
-  //   &__mask {
-  //     position: absolute;
-  //     pointer-events: none;
-  //     z-index: 2;
-  //   }
+  @include tablet {
+    min-height: calc(100vh - 110px);
+    padding: 2rem 0;
+  }
+}
 
-  &__mask--left {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 308px;
-    width: 594px;
+.hero-content {
+  position: absolute;
+  bottom: $spacing-xl;
+  left: $spacing-xl;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  @include tablet {
+    position: static;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 2rem 1rem;
+  }
+}
+
+.content-box {
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 2rem $spacing-xl;
+  border-radius: 14px;
+  max-width: 587px;
+
+  @include tablet {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 1.5rem 2rem;
   }
 
-  &__mask--right {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    height: 300px;
+  @include mobile {
+    padding: 1.25rem 1.5rem;
+  }
+}
+
+.content-text {
+  font-size: 1.25rem;
+  line-height: 2rem;
+  margin-bottom: 2.125rem;
+  font-weight: 400;
+
+  @include tablet {
+    font-size: 18px;
+    line-height: 28px;
+    margin-bottom: 24px;
+    text-align: center;
   }
 
-  //   &__container {
-  //     position: relative;
-  //     z-index: 3;
-  //     display: flex;
-  //     align-items: flex-start;
-  //     justify-content: space-between;
-  //     padding: 6rem 0;
-  //     flex-wrap: wrap;
-  //   }
+  @include mobile {
+    font-size: 1rem;
+    line-height: 1.25rem;
+    text-align: left;
+  }
+}
 
-  &__left-text {
-    position: absolute;
-    top: -1px;
-    left: 0;
-    height: 300px;
+.cta-buttons {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: nowrap;
+}
+
+// Mask elements
+.mask-container {
+  position: absolute;
+  z-index: 5;
+  container-type: inline-size;
+  container-name: mask;
+}
+
+.mask-svg {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.left-mask,
+.right-mask {
+  position: absolute;
+  width: 40%;
+  height: auto;
+
+  @include tablet {
+    width: 55%;
   }
 
-  //   &__right-text {
-  //     text-align: right;
-  //     flex: 1 1 40%;
-  //   }
-
-  &__title {
-    font-size: 80px;
-    font-weight: 600;
-    text-transform: uppercase;
-    line-height: 80px;
-    padding-left: 39px;
+  @include mobile {
+    width: 65%;
   }
+}
 
-  //   &__label {
-  //     font-size: 2rem;
-  //     font-weight: 700;
-  //     text-transform: uppercase;
-  //     line-height: 1.1;
-  //   }
+.left-mask {
+  top: -0.1rem;
+}
+
+.right-mask {
+  bottom: 0;
+  right: 0;
+}
+
+.mask-text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+  font-weight: 700;
+  z-index: 6;
+  overflow-wrap: anywhere;
+  max-width: 100%;
+  max-height: 100%;
+  white-space: pre-line;
+  font-size: 13cqw;
+  padding: 2cqw;
+}
+
+.left-mask .mask-text {
+  align-items: flex-start;
+  text-align: left;
+}
+
+.right-mask .mask-text {
+  align-items: flex-end;
+  justify-content: flex-end;
+  text-align: right;
 }

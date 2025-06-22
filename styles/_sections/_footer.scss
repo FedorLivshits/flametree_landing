@@ -1,0 +1,37 @@
+// ===== FOOTER =====
+@use '../variables' as *;
+@use '../mixins' as *;
+
+.site-footer {
+  background: $color-black;
+  color: #8b8b8d;
+  padding: 4rem 1.5rem 2.5rem;
+}
+
+.foot-wrap {
+  @include container(1280px);
+  text-align: center;
+}
+
+.foot-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-bottom: 2.5rem;
+
+  a {
+    color: #8b8b8d;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color $transition-base;
+
+    &:hover {
+      color: $color-white;
+    }
+  }
+}
+
+.foot-copy {
+  font-size: 0.85rem;
+}

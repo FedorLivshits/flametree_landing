@@ -1,6 +1,20 @@
+// 1. Переменные и миксины
 @use './variables' as *;
 @use './mixins' as *;
+
+// 2. Базовые стили
 @use './base';
-@use './layout';
-@use './components';
+
+// 3. Компоненты
+@use './_sections/header';
 @use './_sections/hero';
+@use './_sections/companies';
+@use './_sections/use-cases';
+@use './_sections/capabilities';
+@use './_sections/advantages';
+@use './_sections/testimonials';
+@use './_sections/features';
+@use './_sections/benefits';
+@use './_sections/difference';
+@use './_sections/faq';
+@use './_sections/footer';
