@@ -1,3 +1,5 @@
+import '../styles/main.scss';
+
 // Mobile Menu Functions
 function toggleMobileMenu() {
   const overlay = document.querySelector('.mobile-menu-overlay');

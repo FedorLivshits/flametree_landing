@@ -1,5 +1,5 @@
-import { defineConfig } from 'vite';
 import path from 'path';
+import { defineConfig } from 'vite';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -17,10 +17,12 @@ export default defineConfig({
   },
   build: {
     outDir: 'dist',
+    emptyOutDir: true,
     assetsDir: 'assets',
     sourcemap: false,
     minify: 'esbuild',
     rollupOptions: {
+      input: 'index.html',
       output: {
         manualChunks: undefined,
       },
