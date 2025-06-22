@@ -854,11 +854,11 @@
         }
       }
 
-      /* === ADVANTAGES ================================================ */
+      /* ============ ADVANTAGES =============================== */
       .advantages {
         background: #1c1c1e;
         color: #c4c6c8;
-        padding: clamp(4rem, 10vw, 6rem) 2rem;
+        padding: clamp(4rem, 9vw, 6rem) 1.5rem;
         font-family: 'Space Grotesk', sans-serif;
       }
       .advantages__inner {
@@ -866,87 +866,105 @@
         margin-inline: auto;
       }
 
-      /* eyebrow */
+      /* ---------- EYEBROW + HEADLINE ---------- */
       .advantages__eyebrow {
         letter-spacing: 0.35em;
         text-transform: uppercase;
         font-size: 0.75rem;
         color: #7a7d82;
         text-align: center;
-        margin-bottom: 1.5rem;
+        margin-bottom: 1.25rem;
       }
-
-      /* headline */
       .advantages__headline {
         text-align: center;
-        color: #ffffff;
+        color: #fff;
         line-height: 1.15;
-        font-size: clamp(2rem, 5vw+1rem, 3.5rem);
-        font-weight: 600;
-        margin-bottom: 4rem;
+        font-size: clamp(2rem, 5vw+1rem, 3.2rem);
+        font-weight: 500;
+        font-size: 3.5rem;
+        line-height: 4rem;
+        margin-bottom: 3.5rem;
       }
 
-      /* list */
+      /* ---------- LIST ROWS (desktop ≥ 900 px) ---------- */
       .adv-list {
+        list-style: none;
         margin: 0;
         padding: 0;
-        list-style: none;
         border-top: 1px solid #333;
       }
       .adv-item {
         display: grid;
-        grid-template-columns: 120px 1fr;
-        gap: 3rem;
+        grid-template-columns: 120px 280px 1fr;
+        column-gap: 2.5rem;
         padding-block: 2.8rem;
         border-bottom: 1px solid #333;
       }
       .adv-num {
-        font-size: clamp(2.5rem, 6vw, 4.5rem);
+        font-size: clamp(2.75rem, 6vw, 4.5rem);
+        line-height: clamp(2.75rem, 6vw, 4.5rem);
         font-weight: 600;
         color: #5b5d61;
-        line-height: 1;
-        align-self: start;
+        grid-column: 1;
       }
       .adv-title {
+        grid-column: 2;
+        align-self: start;
+        margin: 0;
         color: #fff;
         font-size: 1.25rem;
         font-weight: 500;
-        line-height: 1.35;
-        margin: 0 0 1rem;
-      }
-      .adv-text {
-        font-size: 1rem;
-        line-height: 1.6;
-        font-weight: 400;
+        line-height: 1.3;
         margin: 0;
       }
+      .adv-text {
+        grid-column: 3;
+        margin: 0;
+        font-size: 1rem;
+        line-height: 1.6;
+      }
 
-      /* ––– Tablet & below ––– */
-      @media (max-width: 768px) {
+      /* ---------- TABLET ≤ 899 px ---------- */
+      @media (max-width: 899px) {
         .adv-item {
-          grid-template-columns: 80px 1fr;
-          gap: 1.5rem;
-          padding-block: 2rem;
+          grid-template-columns: 90px 1fr;
+          column-gap: 1.75rem;
+        }
+        /* заголовок и текст складываем вертикально */
+        .adv-title {
+          grid-column: 2;
         }
         .adv-text {
+          grid-column: 2;
+          margin-top: 0.9rem;
           font-size: 0.95rem;
+        }
+        .adv-body {
+          /*--обёртка заголовка + текста */
+          display: grid;
+          row-gap: 0.9rem;
         }
       }
 
-      /* ––– Mobile stacking ––– */
+      /* ---------- MOBILE ≤ 480 px ---------- */
       @media (max-width: 480px) {
+        .advantages {
+          padding: 3.5rem 1rem;
+        }
+
         .adv-item {
-          grid-template-columns: 60px 1fr;
-          padding-block: 1.75rem;
+          grid-template-columns: 1fr;
+          row-gap: 1.25rem;
+          padding-block: 2rem;
         }
         .adv-num {
-          font-size: 2.6rem;
+          font-size: 2.5rem;
         }
         .adv-title {
-          font-size: 1.125rem;
+          font-size: 1.1rem;
         }
         .adv-text {
-          font-size: 0.9rem;
+          font-size: 0.92rem;
         }
       }
 
@@ -1977,48 +1995,40 @@
         <ol class="adv-list">
           <li class="adv-item">
             <div class="adv-num">01</div>
-            <div class="adv-body">
-              <h3 class="adv-title">Fast Time-to-Value</h3>
-              <p class="adv-text">
-                With ready-made templates, visual configuration and instant deployment, Flametree
-                lets your team go live quickly and focus on outcomes, not implementation.
-              </p>
-            </div>
+            <h3 class="adv-title">Fast Time-to-Value</h3>
+            <p class="adv-text">
+              With ready-made templates, visual configuration and instant deployment, Flametree lets
+              your team go live quickly and focus on outcomes, not implementation.
+            </p>
           </li>
 
           <li class="adv-item">
             <div class="adv-num">02</div>
-            <div class="adv-body">
-              <h3 class="adv-title">Multilingual &amp;<br />Multichannel Support</h3>
-              <p class="adv-text">
-                Engage users in 150+ languages and across all key channels — voice, chat, email,
-                messengers, SMS and mobile apps. Scale effortlessly across regions and touch-points
-                from a single platform.
-              </p>
-            </div>
+            <h3 class="adv-title">Multilingual &<br />Multichannel Support</h3>
+            <p class="adv-text">
+              Engage users in 150+ languages and across all key channels — voice, chat, email,
+              messengers, SMS and mobile apps. Scale effortlessly across regions and touch-points
+              from a single platform.
+            </p>
           </li>
 
           <li class="adv-item">
             <div class="adv-num">03</div>
-            <div class="adv-body">
-              <h3 class="adv-title">Model Agnostic<br />Architecture</h3>
-              <p class="adv-text">
-                Choose the best LLM for your needs — open-source or proprietary, cloud or on-prem.
-                Flametree supports voice, translation, embedding and RAG models out of the box.
-              </p>
-            </div>
+            <h3 class="adv-title">Model Agnostic<br />Architecture</h3>
+            <p class="adv-text">
+              Choose the best LLM for your needs — open-source or proprietary, cloud or on-prem.
+              Flametree supports voice, translation, embedding and RAG models out of the box.
+            </p>
           </li>
 
           <li class="adv-item">
             <div class="adv-num">04</div>
-            <div class="adv-body">
-              <h3 class="adv-title">Human in the loop</h3>
-              <p class="adv-text">
-                AI handles routine tasks, while humans stay in control when it matters most.
-                Built-in co-pilot mode helps operators respond faster with AI-suggested actions and
-                maintain compliance and trust.
-              </p>
-            </div>
+            <h3 class="adv-title">Human in the loop</h3>
+            <p class="adv-text">
+              AI handles routine tasks, while humans stay in control when it matters most. Built-in
+              co-pilot mode helps operators respond faster with AI-suggested actions and maintain
+              compliance and trust.
+            </p>
           </li>
         </ol>
       </div>
