@@ -9,7 +9,11 @@
   position: relative;
 
   @include tablet {
-    min-height: calc(100vh - 70px);
+    height: calc(100vh - 110px);
+  }
+
+  @include mobile {
+    height: 600px;
   }
 }
 
@@ -20,15 +24,19 @@
   height: 100%;
 
   @include tablet {
-    min-height: calc(100vh - 70px);
+    height: calc(100vh - 110px);
+  }
+
+  @include mobile {
+    height: 600px;
   }
 }
 
 .hero-background {
   flex: 1;
   padding: 4rem 0;
-  border: 1px solid $color-white;
-  background-image: url('/assets/images/bg-hero.png');
+  border: 2px solid $color-white;
+  background: none;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -38,9 +46,27 @@
   max-height: 1000px;
   overflow: hidden;
 
+  #gradient-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    z-index: 1;
+  }
+  z-index: 10;
+  border-radius: $border-radius-xl;
+  position: relative;
+  overflow: hidden;
+
   @include tablet {
     min-height: calc(100vh - 110px);
     padding: 2rem 0;
+  }
+
+  @include mobile {
+    min-height: 600px;
+    height: 600px;
   }
 }
 
@@ -48,36 +74,40 @@
   position: absolute;
   bottom: $spacing-xl;
   left: $spacing-xl;
-  z-index: 10;
+  z-index: 11;
   display: flex;
   flex-direction: column;
   justify-content: center;
 
-  @include tablet {
-    position: static;
+  @media (max-width: 900px) {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100%;
-    padding: 2rem 1rem;
+    left: 0;
+    bottom: 0;
+    // padding: 2rem 1rem;
   }
 }
 
 .content-box {
   background: rgba(255, 255, 255, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.3);
-  padding: 2rem $spacing-xl;
+  padding: 2rem 2.5rem;
   border-radius: 14px;
-  max-width: 587px;
+  max-width: 507px;
 
-  @include tablet {
-    max-width: 100%;
+  @include small-laptop {
+    max-width: 440px;
+  }
+
+  @media (max-width: 900px) {
+    max-width: 90%;
     margin: 0 auto;
-    padding: 1.5rem 2rem;
   }
 
   @include mobile {
-    padding: 1.25rem 1.5rem;
+    padding: 24px;
   }
 }
 
@@ -87,11 +117,7 @@
   margin-bottom: 2.125rem;
   font-weight: 400;
 
-  @include tablet {
-    font-size: 18px;
-    line-height: 28px;
-    margin-bottom: 24px;
-    text-align: center;
+  @media (max-width: 900px) {
   }
 
   @include mobile {
@@ -103,7 +129,7 @@
 
 .cta-buttons {
   display: flex;
-  gap: 0.75rem;
+  gap: 12px;
   flex-wrap: nowrap;
 }
 
@@ -133,12 +159,13 @@
   }
 
   @include mobile {
-    width: 65%;
+    width: 68%;
   }
 }
 
 .left-mask {
-  top: -0.1rem;
+  top: -2px;
+  left: -2px;
 }
 
 .right-mask {

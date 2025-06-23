@@ -11,7 +11,7 @@
   padding: 1rem 0;
   z-index: $z-index-header;
 
-  @include tablet {
+  @include small-laptop {
     padding: 0.75rem 0;
   }
 }
@@ -19,14 +19,14 @@
 .header-content {
   @include flex-between;
 
-  @include tablet {
+  @include small-laptop {
     position: relative;
   }
 }
 
 // Logo positioning on mobile
 .logo {
-  @include tablet {
+  @include small-laptop {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
@@ -39,7 +39,7 @@
   gap: $spacing-lg;
   align-items: center;
 
-  @include tablet {
+  @include small-laptop {
     display: none;
   }
 
@@ -62,7 +62,7 @@
   gap: $spacing-sm;
   align-items: center;
 
-  @include tablet {
+  @include small-laptop {
     gap: 0;
   }
 }
@@ -76,7 +76,7 @@
   cursor: pointer;
   padding: 1rem 1.5rem;
 
-  @include tablet {
+  @include small-laptop {
     display: none;
   }
 }
@@ -85,7 +85,7 @@
   @include button-dark;
   padding: 1rem 1.5rem;
 
-  @include tablet {
+  @include small-laptop {
     padding: 0.75rem;
     width: 40px;
     height: 40px;
@@ -94,7 +94,7 @@
   }
 
   .signup-text {
-    @include tablet {
+    @include small-laptop {
       display: none;
     }
   }
@@ -106,7 +106,7 @@
   height: 20px;
   fill: currentColor;
 
-  @include tablet {
+  @include small-laptop {
     display: block;
   }
 }
@@ -120,7 +120,7 @@
   cursor: pointer;
   padding: 0.5rem;
 
-  @include tablet {
+  @include small-laptop {
     display: block;
     order: -1;
   }

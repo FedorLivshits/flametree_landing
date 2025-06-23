@@ -462,7 +462,7 @@ class Gradient {
         (this.isScrolling = !1), this.isIntersecting && this.play();
       }),
       e(this, 'resize', () => {
-        (this.width = window.innerWidth),
+        (this.width = this.el.offsetWidth),
           this.minigl.setSize(this.width, this.height),
           this.minigl.setOrthographicCamera(),
           (this.xSegCount = Math.ceil(this.width * this.conf.density[0])),

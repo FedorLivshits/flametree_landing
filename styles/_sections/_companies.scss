@@ -6,28 +6,19 @@
   background: $color-white;
   padding: 6.25rem 0 2.5rem 0;
   text-align: center;
+
+  @include mobile {
+    padding: 4rem 0 2.5rem 0;
+  }
 }
 
 .companies-label {
-  @include gradient-text;
-  font-weight: 700;
-  font-size: 1.25rem;
+  @include eyebrow-text;
+  font-weight: 400;
+  margin-bottom: 3.5rem;
 
-  &--mobile {
-    margin-bottom: 1.4rem;
-    display: none;
-
-    @include tablet {
-      display: block;
-    }
-  }
-
-  &--desk {
-    display: block;
-
-    @include tablet {
-      display: none;
-    }
+  @include mobile {
+    margin-bottom: 2.5rem;
   }
 }
 

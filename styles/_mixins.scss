@@ -11,7 +11,7 @@
 // Button base styles
 @mixin button-base {
   display: inline-block;
-  padding: 0.75rem 1.5rem;
+  padding: 12px 24px;
   border-radius: $border-radius-md;
   font-weight: 500;
   text-decoration: none;
@@ -19,6 +19,10 @@
   cursor: pointer;
   transition: all $transition-base;
   font-size: 1rem;
+
+  @include mobile-small() {
+    padding: 8px 16px;
+  }
 }
 
 // Button variants
@@ -26,7 +30,7 @@
   @include button-base;
   background: $color-white;
   color: $color-gray-darker;
-  border: 1px solid $color-white;
+  border: 1px solid rgba(255, 255, 255, 0.6);
 
   &:hover {
     background: $color-gray-light;
@@ -38,7 +42,7 @@
   @include button-base;
   background: rgba(255, 255, 255, 0.4);
   color: $color-gray-darker;
-  border: 1px solid $color-white;
+  border: 1px solid rgba(255, 255, 255, 0.6);
 
   &:hover {
     transform: translateY(-2px);
@@ -123,6 +127,12 @@
 }
 
 // Media queries
+@mixin mobile-small {
+  @media (max-width: $breakpoint-mobile-small) {
+    @content;
+  }
+}
+
 @mixin mobile {
   @media (max-width: $breakpoint-mobile) {
     @content;
@@ -131,6 +141,12 @@
 
 @mixin tablet {
   @media (max-width: $breakpoint-tablet) {
+    @content;
+  }
+}
+
+@mixin small-laptop {
+  @media (max-width: $breakpoint-small-laptop) {
     @content;
   }
 }

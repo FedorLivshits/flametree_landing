@@ -27,10 +27,10 @@ $bg-gradient-companies: linear-gradient(
 );
 
 // Canvas gradient colors
-$gradient-color-1: #a960ee;
-$gradient-color-2: #ff333d;
-$gradient-color-3: #90e0ff;
-$gradient-color-4: #ffcb57;
+$gradient-color-1: #fba020;
+$gradient-color-2: #fcdb37;
+$gradient-color-3: #fcb409;
+$gradient-color-4: #f47711;
 
 // Typography
 $font-family-primary: 'Space Grotesk', sans-serif;
@@ -68,7 +68,9 @@ $z-index-mobile-menu: 1998;
 $z-index-mobile-menu-content: 1999;
 
 // Breakpoints
+$breakpoint-mobile-small: 375px;
 $breakpoint-mobile: 480px;
 $breakpoint-tablet: 768px;
+$breakpoint-small-laptop: 1024px;
 $breakpoint-desktop: 990px;
 $breakpoint-large: 1200px;
