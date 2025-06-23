@@ -538,7 +538,7 @@ class Gradient {
             this.el &&
               ((this.computedCanvasStyle = getComputedStyle(this.el)), this.waitForCssVars());
           }));
-          /*
+    /*
             this.scrollObserver = await s.create(.1, !1),
             this.scrollObserver.observe(this.el),
             this.scrollObserver.onSeparate(() => {
@@ -752,7 +752,10 @@ class Gradient {
  * Gradient.toggleColor(index)
  * Gradient.updateFrequency(freq)
  */
-var gradient = new Gradient();
-gradient.initGradient('#gradient-canvas');
 
-window.Gradient = Gradient;
+export default Gradient;
+
+export function initHeroGradient(selector = '#gradient-canvas') {
+  const g = new Gradient();
+  return g.initGradient(selector);
+}
