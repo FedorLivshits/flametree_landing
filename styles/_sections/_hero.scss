@@ -2,6 +2,9 @@
 @use '../variables' as *;
 @use '../mixins' as *;
 
+/* ------------------------------------------------------------------ */
+/*   Base                                                             */
+/* ------------------------------------------------------------------ */
 .hero {
   height: calc(100vh - 110px);
   max-height: 1040px;
@@ -11,9 +14,11 @@
   @include tablet {
     height: calc(100vh - 110px);
   }
-
   @include mobile {
-    height: 600px;
+    height: 525px;
+  }
+  @include mobile-small {
+    height: 484px;
   }
 }
 
@@ -26,12 +31,17 @@
   @include tablet {
     height: calc(100vh - 110px);
   }
-
   @include mobile {
-    height: 600px;
+    height: 525px;
+  }
+  @include mobile-small {
+    height: 484px;
   }
 }
 
+/* ------------------------------------------------------------------ */
+/*   Background + Gradient                                            */
+/* ------------------------------------------------------------------ */
 .hero-background {
   flex: 1;
   padding: 4rem 0;
@@ -54,6 +64,7 @@
     display: block;
     z-index: 1;
   }
+
   z-index: 10;
   border-radius: $border-radius-xl;
   position: relative;
@@ -65,11 +76,18 @@
   }
 
   @include mobile {
-    min-height: 600px;
-    height: 600px;
+    min-height: 525px;
+    height: 525px;
+  }
+  @include mobile-small {
+    min-height: 484px;
+    height: 484px;
   }
 }
 
+/* ------------------------------------------------------------------ */
+/*   Content                                                           */
+/* ------------------------------------------------------------------ */
 .hero-content {
   position: absolute;
   bottom: $spacing-xl;
@@ -80,13 +98,10 @@
   justify-content: center;
 
   @media (max-width: 900px) {
+    inset: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100%;
-    left: 0;
-    bottom: 0;
-    // padding: 2rem 1rem;
   }
 }
 
@@ -100,14 +115,16 @@
   @include small-laptop {
     max-width: 440px;
   }
-
   @media (max-width: 900px) {
     max-width: 90%;
-    margin: 0 auto;
   }
-
   @include mobile {
     padding: 24px;
+    margin-top: 26px;
+  }
+
+  @include mobile-small {
+    margin-top: 24px;
   }
 }
 
@@ -116,9 +133,6 @@
   line-height: 2rem;
   margin-bottom: 2.125rem;
   font-weight: 400;
-
-  @media (max-width: 900px) {
-  }
 
   @include mobile {
     font-size: 1rem;
@@ -133,7 +147,9 @@
   flex-wrap: nowrap;
 }
 
-// Mask elements
+/* ------------------------------------------------------------------ */
+/*   SVG-mask                                                         */
+/* ------------------------------------------------------------------ */
 .mask-container {
   position: absolute;
   z-index: 5;
@@ -144,7 +160,6 @@
 .mask-svg {
   width: 100%;
   height: auto;
-  object-fit: contain;
   display: block;
 }
 
@@ -152,12 +167,10 @@
 .right-mask {
   position: absolute;
   width: 40%;
-  height: auto;
 
   @include tablet {
     width: 55%;
   }
-
   @include mobile {
     width: 68%;
   }
@@ -167,7 +180,6 @@
   top: -2px;
   left: -2px;
 }
-
 .right-mask {
   bottom: 0;
   right: 0;
@@ -178,9 +190,8 @@
   inset: 0;
   display: flex;
   flex-direction: column;
-  line-height: 1.1;
   font-weight: 700;
-  z-index: 6;
+  line-height: 1.1;
   overflow-wrap: anywhere;
   max-width: 100%;
   max-height: 100%;
@@ -193,9 +204,38 @@
   align-items: flex-start;
   text-align: left;
 }
-
 .right-mask .mask-text {
   align-items: flex-end;
   justify-content: flex-end;
   text-align: right;
+}
+
+/* ================================================================== */
+/*   landscape  (For example, iPhone XR 896 × 414)  */
+/* ================================================================== */
+@media (orientation: landscape) and (max-width: 930px) and (max-height: 550px) {
+  .hero,
+  .hero-container,
+  .hero-background {
+    height: auto;
+    min-height: 600px;
+  }
+
+  .hero-background {
+    padding: 3rem 0;
+  }
+
+  .content-box {
+    max-width: 420px;
+    padding: 24px;
+    margin-top: 46px;
+  }
+  .content-text {
+    font-size: 1rem;
+    line-height: 1.25rem;
+  }
+  .cta-buttons {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 }
