@@ -126,6 +126,14 @@
   text-align: center;
 }
 
+@mixin hide-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 // Media queries
 @mixin mobile-small {
   @media (max-width: $breakpoint-mobile-small) {

@@ -1,4 +1,3 @@
-// ===== USE CASES COMPONENT =====
 @use '../variables' as *;
 @use '../mixins' as *;
 
@@ -14,32 +13,36 @@
 
 .section-header {
   margin-bottom: 4rem;
-
-  @include mobile {
-    margin-bottom: 3rem;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
-
 .section-title {
-  @include responsive-font(1.75rem, 3.5rem, 1.3, 4rem);
+  @include responsive-font(1.75rem, 2.5rem, 1.3, 2.5rem);
   font-weight: 500;
   max-width: 988px;
-  text-align: left;
+  text-align: center;
 
   @include tablet {
     font-size: 2rem;
   }
 }
 
-.use-cases-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+.uc-viewport {
+  @include hide-scrollbar;
+  overflow: hidden;
+  padding-bottom: 0.5rem;
+}
+
+.uc-track {
+  display: flex;
   gap: 2rem;
-  grid-auto-rows: 1fr;
+  transition: transform $transition-slow;
+  scroll-behavior: smooth;
 
   @include tablet {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 1.25rem;
   }
 }
 
@@ -49,11 +52,12 @@
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
+  scroll-snap-align: start;
 
+  flex: 0 0 364px;
   @include tablet {
-    padding: 1.5rem;
+    flex: 0 0 80vw;
   }
-
   @include mobile {
     padding: 1.25rem;
   }
@@ -61,12 +65,10 @@
 
 .card-header {
   margin-bottom: 5.5rem;
-
   @include tablet {
     margin-bottom: 1.5rem;
   }
 }
-
 .card-tag {
   display: inline-block;
   padding: 8px 12px;
@@ -74,36 +76,30 @@
   font-size: 12px;
   line-height: 16px;
   font-weight: 400;
-
   &.inbound {
     background: $color-black;
     color: $color-white;
   }
-
   &.outbound {
     background: #ffe1d2;
     color: $color-gray-dark;
   }
 }
-
 .card-content {
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
 }
-
 .card-title {
   color: $color-black;
   font-size: 1.5rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
   line-height: 2.25rem;
-
   @include tablet {
     font-size: 1.25rem;
   }
 }
-
 .card-description {
   color: $color-gray-dark;
   font-size: 1rem;
@@ -111,7 +107,6 @@
   margin-bottom: 0.5rem;
   flex-grow: 1;
 }
-
 .card-link {
   margin-top: auto;
   display: flex;
@@ -122,16 +117,87 @@
   font-size: 1rem;
   text-decoration: underline;
   transition: color $transition-base;
-
   &:hover {
     color: $color-orange;
-
     svg {
       transform: translateX(4px);
     }
   }
-
   svg {
     transition: transform $transition-base;
+  }
+}
+
+.uc-controls {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+
+  @include tablet {
+    display: none;
+    grid-template-columns: auto 1fr auto;
+  }
+}
+
+.uc-nav {
+  justify-self: start;
+  display: flex;
+  gap: 0.25rem;
+  margin-top: 2.5rem;
+
+  @media (max-width: 767px) {
+    display: none;
+  }
+}
+.uc-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: $border-radius-lg;
+  border: 2px solid #a0a0ab;
+  background: transparent;
+  cursor: pointer;
+  transition: all $transition-base;
+  &:hover {
+    transform: translateY(-2px);
+    border-color: $color-gray-darker;
+  }
+}
+
+.uc-dots {
+  margin-top: 1.8rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+
+  @include tablet {
+    justify-content: flex-end;
+  }
+
+  span {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #a0a0ab;
+    opacity: 0.5;
+    transition: all $transition-base;
+    &.is-active {
+      border-radius: 2px;
+      opacity: 1;
+      width: 61px;
+    }
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/*            С В А Й П   н а   м о б и л ь н о м                     */
+/* ------------------------------------------------------------------ */
+@media (max-width: 767px) {
+  .uc-viewport {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+  .uc-track {
+    transition: none;
   }
 }

@@ -1,0 +1,197 @@
+@use '../variables' as *;
+@use '../mixins' as *;
+
+/* ===== PLATFORM ============================================================= */
+.platform {
+  background: #1d1d1f;
+  padding: clamp(4rem, 9vw, 6rem) 0;
+  color: #d1d1d4;
+
+  &__inner {
+    @include container(1440px);
+    display: grid;
+    grid-template-columns: minmax(500px, 600px) 1fr;
+    column-gap: 4rem;
+
+    /* tablet & mobile → one column */
+    @media (max-width: 1050px) {
+      grid-template-columns: 1fr;
+      row-gap: 2.5rem;
+    }
+  }
+
+  /* ---------- STICKY / FLOATING SCREEN ------------------------------------- */
+  &__screen {
+    position: sticky;
+    top: calc(var(--header-h, 88px) + 24px);
+    align-self: flex-start;
+    min-height: 436px;
+
+    .screen-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 12px;
+      display: block;
+      transition: opacity 0.35s;
+      box-shadow: 0 14px 48px rgba(#000, 0.45);
+    }
+
+    /* <= 1050 — one column */
+    @media (max-width: 1050px) {
+      position: static;
+      min-height: auto;
+      max-width: 640px;
+      margin-inline: auto;
+    }
+  }
+
+  /* ---------- STEPS -------------------------------------------------------- */
+  &__steps {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+
+    @media (max-width: 1050px) {
+      flex-direction: row;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 1.5rem;
+      padding-bottom: 1.5rem;
+      scrollbar-width: none; // Firefox
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+  }
+
+  .step {
+    list-style: none;
+    background: #323232;
+    border-radius: 14px;
+    min-height: 436px;
+    padding: 2.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    opacity: 0.55;
+    transition: opacity 0.35s ease-in-out;
+    scroll-snap-align: start;
+
+    &.is-active {
+      opacity: 1;
+    }
+
+    &__body {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    &__num {
+      display: inline-grid;
+      place-content: center;
+      width: 2.5rem;
+      height: 2.5rem;
+      border: 1px solid #ff9b00;
+      border-radius: 50%;
+      color: #fff;
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    &__title {
+      color: #fff;
+      font-size: 1.25rem;
+      font-weight: 600;
+      line-height: 1.35;
+      margin: 0 0 0.5rem;
+    }
+    &__lead {
+      font-size: 0.95rem;
+      line-height: 1.55;
+      color: #c4c6c8;
+    }
+    &__tags {
+      margin-top: auto;
+      font-size: 0.78rem;
+      line-height: 1.45;
+      color: #8c8c91;
+    }
+
+    @media (max-width: 1050px) {
+      min-height: 240px;
+      min-width: 80%;
+      flex: 0 0 80%;
+      padding: 1.5rem 1rem 1.75rem;
+      background: transparent;
+      opacity: 1;
+    }
+  }
+
+  &__carousel-nav {
+    display: none;
+
+    @media (max-width: 1050px) {
+      margin-top: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+  .plat-btns {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .plat-btn {
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    border: 1px solid #555;
+    background: #1d1d1f;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition:
+      border-color 0.25s,
+      transform 0.25s;
+
+    &:hover {
+      border-color: #fff;
+      transform: translateY(-2px);
+    }
+    img {
+      width: 24px;
+    }
+  }
+
+  .plat-dots {
+    display: flex;
+    gap: 0.4rem;
+
+    span {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: #777;
+      opacity: 0.5;
+      transition: all 0.25s;
+
+      &.is-active {
+        width: 28px;
+        border-radius: 2px;
+        opacity: 1;
+      }
+    }
+  }
+}
+
+@media (min-width: 1051px) {
+  .platform__steps {
+    order: 1;
+  }
+  .platform__screen {
+    order: 2;
+  }
+}

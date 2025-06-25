@@ -5,6 +5,7 @@
 .testimonials {
   background: $color-white;
   @include section-padding(4rem, 6rem);
+  background: $bg-gradient-companies;
 }
 
 .t-wrap {
@@ -30,8 +31,15 @@
 
 // Carousel structure
 .t-viewport {
+  @include hide-scrollbar;
   padding: 2rem 0;
   overflow: hidden;
+
+  @include tablet {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
 }
 
 .t-track {
@@ -41,7 +49,8 @@
   transition: transform $transition-slow;
 
   @include tablet {
-    gap: 1.25rem;
+    transition: none;
+    gap: 1rem;
   }
 }
 
@@ -50,14 +59,14 @@
   flex: 0 0 320px;
   @include card-base;
   padding: 2rem 1.75rem;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  box-shadow: rgba(149, 157, 165, 0.2) 24px;
   text-align: left;
   display: flex;
   flex-direction: column;
 
   @include tablet {
+    scroll-snap-align: start;
     flex: 0 0 80vw;
-    padding: 1.75rem 1.5rem;
   }
 }
 
@@ -160,5 +169,15 @@
       opacity: 1;
       width: 61px;
     }
+  }
+}
+
+@media (max-width: 767px) {
+  .t-nav {
+    display: none;
+  }
+
+  .t-dots {
+    display: none;
   }
 }

@@ -1,111 +1,145 @@
-// ===== FAQ SECTION =====
 @use '../variables' as *;
 @use '../mixins' as *;
 
-.faq-split {
-  padding: 4rem 1.5rem;
-  background: $color-white;
-}
-
-.faq-box {
-  @include container(1400px, 0);
+.faq {
+  height: 100vh;
+  max-height: 1000px;
+  background: #bfbfbf40;
   display: flex;
-  overflow: hidden;
-  border-radius: 40px;
-  min-height: 440px;
-  @include tablet {
-    flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1rem;
+
+  &__inner {
+    max-width: 880px;
+    width: 100%;
+    text-align: center;
   }
-}
 
-// Left side
-.faq-left {
-  flex: 1;
-  background: #dfdfdf;
-  padding: 3.5rem 2.5rem;
-  display: flex;
-  flex-direction: column;
-}
-
-.faq-hl {
-  font-weight: 600;
-  font-size: 4rem;
-  line-height: 1.05;
-  margin: 0 0 2rem;
-  color: $color-black;
-}
-
-.faq-copy {
-  font-size: 1.15rem;
-  line-height: 1.55;
-  margin: 0 0 3rem;
-  color: $color-black;
-}
-
-// Right side with chat mockup
-.faq-right {
-  flex: 1;
-  position: relative;
-  background: url('/assets/images/faq-bg.png') center/cover no-repeat;
-  @include flex-center;
-  padding: 2.5rem;
-
-  @include tablet {
-    padding: 3rem 1.5rem;
+  /* eyebrow */
+  &__eyebrow {
+    @include eyebrow-text;
+    margin-bottom: 2.5rem;
+    color: $color-gray-medium;
   }
-}
 
-// Chat component
-.chat {
-  max-width: 420px;
-  height: 428px;
-  background: $color-white;
-  border-radius: 18px;
-  overflow: hidden;
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
-  font-size: 0.78rem;
-  color: $color-black;
-  display: flex;
-  flex-direction: column;
-
-  header {
-    background: #fafbfc;
-    font-size: 0.8rem;
-    padding: 0.85rem 1.2rem;
+  /* заголовок */
+  &__headline {
+    font-family: $font-family-primary;
     font-weight: 600;
-    border-bottom: 1px solid #eee;
+    line-height: 1.1;
+    margin: 0 0 1.75rem;
+    @include clamp-size(1.75rem, calc(4.2vw + 1rem), 2.75rem);
+  }
+
+  /* лид-текст */
+  &__lead {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    max-width: 465px;
+    margin: 0 auto 2.75rem;
+    color: $color-gray-dark;
   }
 }
 
-.c-body {
-  padding: 1rem;
+/* --------- mock-up чата --------- */
+.chat {
+  --radius: 14px;
+  width: 420px;
+  height: 470px;
+  max-width: 94vw;
+  background: #fff;
+  border-radius: var(--radius);
+  box-shadow: 0 18px 50px rgba(#000, 0.12);
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
-}
+  font-size: 0.78rem;
+  overflow: hidden;
+  margin-inline: auto;
 
-.msg {
-  padding: 12px 16px;
-  border-radius: 0px 14px 14px 14px;
-  line-height: 1.4;
-  font-size: 0.7rem;
-  font-weight: 400;
-
-  &.a {
-    background: #f5f5f5;
+  /* верхняя полоска */
+  &__bar {
+    background: #fafbfc;
+    font-weight: 600;
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid #eee;
+    text-align: left;
   }
 
-  &.u {
-    background: #626166;
-    color: $color-white;
-    align-self: flex-start;
+  /* область сообщений */
+  &__body {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    max-height: 290px;
+    overflow-y: auto;
+  }
+
+  /* сообщение */
+  .msg {
+    max-width: 80%;
+    padding: 0.75rem 1rem;
+    line-height: 1.45;
+    border-radius: var(--radius);
+    word-wrap: break-word;
+
+    a {
+      color: #e32828;
+      text-decoration: underline;
+    }
+
+    &--bot {
+      text-align: left;
+      background: #f5f5f5;
+      color: #000;
+      align-self: flex-start;
+      border-radius: var(--radius) var(--radius) var(--radius) 0;
+    }
+
+    &--user {
+      text-align: right;
+      background: #5d5e63;
+      color: #fff;
+      align-self: flex-end;
+      border-radius: var(--radius) var(--radius) 0 var(--radius);
+    }
+  }
+
+  /* input-бар (статичный) */
+  &__input {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-top: 1px solid #eee;
+    background: #fafbfc;
+    padding: 0.85rem 1rem;
+    color: #94979b;
+    font-size: 0.8rem;
+    user-select: none;
+  }
+
+  &__attach {
+    width: 16px;
+    height: 16px;
+    border: 2px solid #94979b;
+    border-radius: 4px;
+    flex: 0 0 16px;
+  }
+
+  /* подпись */
+  &__foot {
+    font-size: 0.7rem;
+    color: #c9c9c9;
+    padding: 0.4rem 1rem 0.7rem;
+    text-align: center;
   }
 }
 
-.c-input {
-  padding: 0.85rem 1.2rem;
-  border-top: 1px solid #eee;
-  background: #fafbfc;
-  color: #94979b;
-  font-size: 0.82rem;
+/* --------- адаптив --------- */
+@media (max-width: 480px) {
+  .faq__lead {
+    font-size: 1rem;
+  }
 }

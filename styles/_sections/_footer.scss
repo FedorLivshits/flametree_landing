@@ -13,6 +13,10 @@
   text-align: center;
 }
 
+.foot-logo {
+  margin-bottom: 2rem;
+}
+
 .foot-nav {
   display: flex;
   flex-wrap: wrap;
@@ -21,7 +25,7 @@
   margin-bottom: 2.5rem;
 
   a {
-    color: #8b8b8d;
+    color: #ffffff;
     text-decoration: none;
     font-size: 0.95rem;
     transition: color $transition-base;

@@ -4,6 +4,7 @@ import '../styles/main.scss';
 /* 2. WebGL-градиент ─ экспортируемая функция из gradient.js
  *    (мы добавляли её в предыдущем шаге) */
 import { initHeroGradient } from './components/gradient.js';
+import './components/scrollSteps.js';
 
 /* 3. --- Mobile-menu helpers -------------------------------- */
 function toggleMobileMenu() {
@@ -50,8 +51,7 @@ function initHeadlineAnimation() {
   if (!lines.length) return;
 
   const io = new IntersectionObserver(
-    (entries) =>
-      entries.forEach((e) => e.target.classList.toggle('is-visible', e.isIntersecting)),
+    (entries) => entries.forEach((e) => e.target.classList.toggle('is-visible', e.isIntersecting)),
     {
       root: null,
       rootMargin: '30% 0px -60% 0px',
@@ -59,6 +59,66 @@ function initHeadlineAnimation() {
     }
   );
   lines.forEach((l) => io.observe(l));
+}
+
+/* === Use-Cases slider ===================================== */
+function initUseCasesSlider() {
+  const track = document.querySelector('.uc-track');
+  const btnPrev = document.querySelector('.uc-btn.prev');
+  const btnNext = document.querySelector('.uc-btn.next');
+  const dotsBox = document.querySelector('.uc-dots');
+  if (!track || !btnPrev || !btnNext || !dotsBox) return;
+
+  const cards = [...track.children];
+
+  /* --- dots --- */
+  cards.forEach((_, i) => {
+    const dot = document.createElement('span');
+    dot.addEventListener('click', () => goTo(i));
+    dotsBox.appendChild(dot);
+  });
+  const dots = [...dotsBox.children];
+  dots[0].classList.add('is-active');
+
+  /* helpers */
+  const cardW = () =>
+    cards[0].getBoundingClientRect().width + parseFloat(getComputedStyle(track).gap);
+
+  let idx = 0;
+  const updateDesktop = () => {
+    track.style.transform = `translateX(${-idx * cardW()}px)`;
+    dots.forEach((d, i) => d.classList.toggle('is-active', i === idx));
+  };
+  const goTo = (i) => {
+    idx = (i + cards.length) % cards.length;
+    updateDesktop();
+  };
+
+  /* buttons */
+  btnPrev.addEventListener('click', () => goTo(idx - 1));
+  btnNext.addEventListener('click', () => goTo(idx + 1));
+  window.addEventListener('resize', updateDesktop, { passive: true });
+
+  /* mobile scroll-sync */
+  const mq = window.matchMedia('(max-width: 767px)');
+  const onScroll = () => {
+    const i = Math.round(track.scrollLeft / cardW());
+    dots.forEach((d, k) => d.classList.toggle('is-active', k === i));
+  };
+  const toggleMode = (e) => {
+    if (e.matches) {
+      // mobile
+      track.style.transform = 'none';
+      track.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    } else {
+      // desktop
+      track.removeEventListener('scroll', onScroll);
+      updateDesktop();
+    }
+  };
+  mq.addEventListener('change', toggleMode);
+  toggleMode(mq);
 }
 
 /* 7. --- Testimonials slider -------------------------------- */
@@ -70,40 +130,59 @@ function initTestimonialsSlider() {
   if (!track || !btnPrev || !btnNext || !dotsBox) return;
 
   const cards = [...track.children];
-  let idx = 0;
-
-  /* dots */
-  cards.forEach((_, i) => {
+  const makeDot = (i) => {
     const dot = document.createElement('span');
-    if (i === 0) dot.classList.add('is-active');
     dot.addEventListener('click', () => goTo(i));
-    dotsBox.appendChild(dot);
-  });
+    return dot;
+  };
+  dotsBox.append(...cards.map((_, i) => makeDot(i)));
   const dots = [...dotsBox.children];
 
-  /* helpers */
-  const updateUI = () => {
-    const cardW =
-      cards[0].getBoundingClientRect().width + parseFloat(getComputedStyle(track).gap);
-    track.style.transform = `translateX(${-idx * cardW}px)`;
+  /* ----------  Desktop режим  ---------- */
+  let idx = 0; // текущий слайд
+  const cardW = () =>
+    cards[0].getBoundingClientRect().width + parseFloat(getComputedStyle(track).gap);
+
+  const updateDesktop = () => {
+    track.style.transform = `translateX(${-idx * cardW()}px)`;
     dots.forEach((d, i) => d.classList.toggle('is-active', i === idx));
   };
   const goTo = (i) => {
     idx = (i + cards.length) % cards.length;
-    updateUI();
+    updateDesktop();
   };
 
-  /* buttons */
   btnPrev.addEventListener('click', () => goTo(idx - 1));
   btnNext.addEventListener('click', () => goTo(idx + 1));
+  window.addEventListener('resize', updateDesktop, { passive: true });
 
-  window.addEventListener('resize', updateUI, { passive: true });
-  updateUI();
+  /* ----------  Мобильный режим  ---------- */
+  const mq = window.matchMedia('(max-width: 767px)');
+  const onScroll = () => {
+    const i = Math.round(track.scrollLeft / cardW());
+    dots.forEach((d, k) => d.classList.toggle('is-active', k === i));
+  };
+
+  const toggleMode = (e) => {
+    if (e.matches) {
+      // мобильный
+      track.style.transform = 'none';
+      track.addEventListener('scroll', onScroll, { passive: true });
+      onScroll(); // инициализируем точки
+    } else {
+      // десктоп
+      track.removeEventListener('scroll', onScroll);
+      updateDesktop();
+    }
+  };
+  mq.addEventListener('change', toggleMode);
+  toggleMode(mq); // первичный вызов
 }
 
 /* 8. --- DOM ready ------------------------------------------ */
 document.addEventListener('DOMContentLoaded', () => {
   initMobileMenu();
+  initUseCasesSlider();
   initParallax();
   initHeadlineAnimation();
   initTestimonialsSlider();
@@ -119,4 +198,4 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 window.toggleMobileMenu = toggleMobileMenu;
-window.closeMobileMenu  = closeMobileMenu;
+window.closeMobileMenu = closeMobileMenu;
