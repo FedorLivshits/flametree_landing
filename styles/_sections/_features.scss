@@ -65,7 +65,7 @@
   transform: translateX(-50%);
   z-index: 1;
   background: $color-white;
-  padding: 0.75rem 2rem;
+  padding: 1.5rem;
   border-bottom-right-radius: $border-radius-xl;
   border-bottom-left-radius: $border-radius-xl;
   font-size: 1rem;
@@ -134,7 +134,7 @@
   transform: translateX(-50%);
   z-index: 1;
   background: $color-white;
-  padding: 1rem 2rem;
+  padding: 1.5rem;
   border-top-left-radius: $border-radius-xl;
   border-top-right-radius: $border-radius-xl;
   @include flex-center;
