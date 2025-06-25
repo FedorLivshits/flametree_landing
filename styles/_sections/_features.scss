@@ -99,17 +99,15 @@
 }
 
 .feature-title {
-  font-size: 3.5rem;
+  font-size: clamp(2rem, 5.5vw, 3rem);
+  line-height: 1.15;
   font-weight: 500;
-  line-height: 4rem;
   margin-bottom: 1.5rem;
 
   @include tablet {
     font-size: 1.75rem;
     line-height: 2.2rem;
-    margin-bottom: 1rem;
   }
-
   @include mobile {
     font-size: 1.5rem;
     line-height: 2rem;
@@ -117,18 +115,15 @@
 }
 
 .feature-description {
-  font-size: 1.5rem;
-  line-height: 2rem;
+  font-size: clamp(1rem, 2.2vw, 1.25rem);
+  line-height: 1.6;
   max-width: 430px;
 
   @include tablet {
     font-size: 1rem;
-    line-height: 1.6rem;
   }
-
   @include mobile {
     font-size: 0.9375rem;
-    line-height: 1.5rem;
   }
 }
 
