@@ -2,7 +2,7 @@
 @use '../mixins' as *;
 
 .faq {
-  min-height: 100vh;
+  min-height: calc(100vh - 110px);
   max-height: 1000px;
   background: #bfbfbf40;
   display: flex;
