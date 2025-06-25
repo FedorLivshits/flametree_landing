@@ -143,3 +143,46 @@
     font-size: 1rem;
   }
 }
+
+/* mobile ≤ 480 px */
+@media (max-width: 480px) {
+  .faq {
+    /* пусть блок становится столько, сколько нужно */
+    height: auto;
+    padding: 3rem 1rem 4rem; /* добавили нижний отступ */
+
+    &__headline {
+      /* плавное сжатие: 1.5 – 2.25 rem */
+      font-size: clamp(1.5rem, 6vw + 0.5rem, 2.25rem);
+    }
+
+    &__lead {
+      font-size: 0.9375rem; /* ещё на 1 пт меньше */
+      line-height: 1.45;
+      margin-bottom: 2rem;
+    }
+  }
+
+  .chat {
+    /* чтоб не упиралась в нижний край */
+    height: min(420px, 75vh);
+    font-size: 0.75rem;
+
+    &__body {
+      /* делаем чуть больше места */
+      max-height: 60%;
+    }
+  }
+}
+
+/* горизонтальный телефон / маленькие планшеты */
+@media (max-height: 500px) and (max-width: 900px) {
+  .faq {
+    height: auto; /* убираем 100vh */
+    padding-top: 2rem;
+  }
+
+  .chat {
+    height: 340px; /* компактное окно */
+  }
+}
