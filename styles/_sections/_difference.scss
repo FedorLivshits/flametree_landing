@@ -18,16 +18,29 @@
     @include eyebrow-text;
     margin-bottom: 4rem;
     margin-top: 5rem;
+    text-align: center;
+  }
+
+  &__center {
+    max-width: 1077px;
+    margin-inline: auto;
+    padding-inline: 1rem;
   }
 
   &__headline {
-    @include container(806px);
+    @include container(1077px);
     @include responsive-font(2.5rem, 3.5rem, 1.1, 1.15);
     font-weight: 600;
     position: relative;
     z-index: 3;
     transition: color 0.4s ease;
     text-align: left;
+    margin-left: 56px;
+
+    @include tablet {
+      margin-left: 0;
+      padding: 0;
+    }
   }
 
   &__inner {

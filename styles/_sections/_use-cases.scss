@@ -53,8 +53,8 @@
   display: flex;
   flex-direction: column;
   scroll-snap-align: start;
-
   flex: 0 0 364px;
+
   @include tablet {
     flex: 0 0 80vw;
   }

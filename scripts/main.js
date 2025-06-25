@@ -55,7 +55,7 @@ function initHeadlineAnimation() {
     (entries) => entries.forEach((e) => e.target.classList.toggle('is-visible', e.isIntersecting)),
     {
       root: null,
-      rootMargin: '30% 0px -60% 0px',
+      rootMargin: '0px 0px -25% 0px',
       threshold: 0,
     }
   );

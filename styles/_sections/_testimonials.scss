@@ -57,7 +57,8 @@
 // Card styles
 .t-card {
   flex: 0 0 320px;
-  @include card-base;
+  background: $color-white;
+  border-radius: $border-radius-xl;
   padding: 2rem 1.75rem;
   box-shadow: rgba(149, 157, 165, 0.2) 24px;
   text-align: left;
