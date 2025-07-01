@@ -29,7 +29,7 @@
       screenImg.style.opacity = 0;
       setTimeout(() => {
         screenImg.src = newSrc;
-      }, 180);
+      }, 350);
     }
   };
 

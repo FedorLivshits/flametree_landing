@@ -6,6 +6,7 @@ import '../styles/main.scss';
 import { initHeroGradient } from './components/gradient.js';
 import './components/scrollSteps.js';
 import './components/lenis-init.js';
+import './components/demo-modal.js';
 
 /* 3. --- Mobile-menu helpers -------------------------------- */
 function toggleMobileMenu() {

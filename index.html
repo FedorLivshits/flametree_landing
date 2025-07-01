@@ -11,8 +11,36 @@
       href="https://fonts.googleapis.com/css2?family=Commissioner:wght@100..900&family=Space+Grotesk:wght@300..700&display=swap"
       rel="stylesheet"
     />
+    <style>
+      #preloader {
+        position: fixed;
+        inset: 0;
+        background: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        transition: opacity 0.6s ease;
+      }
+
+      .preloader__logo {
+        width: 96px;
+        height: auto;
+        opacity: 0;
+        animation: fadeIn 1s forwards 0.2s;
+      }
+
+      @keyframes fadeIn {
+        to {
+          opacity: 1;
+        }
+      }
+    </style>
   </head>
   <body>
+    <div id="preloader">
+      <img src="/assets/images/logo.svg" alt="Logo" class="preloader__logo" />
+    </div>
     <!-- Header -->
     <header class="header">
       <div class="container">
@@ -84,7 +112,7 @@
 
               <div class="cta-buttons">
                 <a href="#" class="btn btn-primary">Try for free</a>
-                <a href="#" class="btn btn-secondary">Get a demo</a>
+                <a href="#" class="btn btn-secondary" data-demo-open>Get a demo</a>
               </div>
             </div>
           </div>
@@ -295,13 +323,13 @@
       <div class="platform__inner container">
         <!-- ❶ sticky-screen (desktop) / floating screen (<=1050) -->
         <div class="platform__screen" aria-hidden="true">
-          <img src="/img/platform.png" alt="Platform UI" class="screen-img" />
+          <img src="/img/platform-1.png" alt="Platform UI" class="screen-img" />
         </div>
 
         <!-- ❷ steps = вертикальный список (desktop) / горизонтальная лента (<=1050)  -->
         <ol class="platform__steps" id="platformSteps">
           <!-- ====== CARD 1 ====== -->
-          <li class="step" data-img="/img/platform.png">
+          <li class="step" data-img="/img/platform-1.png">
             <span class="step__num">1</span>
 
             <div class="step__body">
@@ -320,7 +348,7 @@
           </li>
 
           <!-- ====== CARD 2 ====== -->
-          <li class="step" data-img="/img/platform.png">
+          <li class="step" data-img="/img/platform-2.png">
             <span class="step__num">2</span>
 
             <div class="step__body">
@@ -337,7 +365,7 @@
           </li>
 
           <!-- ====== CARD 3 ====== -->
-          <li class="step" data-img="/img/platform.png">
+          <li class="step" data-img="/img/platform-3.png">
             <span class="step__num">3</span>
 
             <div class="step__body">
@@ -353,7 +381,7 @@
           </li>
 
           <!-- ====== CARD 4 ====== -->
-          <li class="step" data-img="/img/platform.png">
+          <li class="step" data-img="/img/platform-4.png">
             <span class="step__num">4</span>
 
             <div class="step__body">
@@ -401,7 +429,7 @@
           </div>
           <div class="feature-tag">Enterpise-grade</div>
           <div class="feature-demo-btn-container">
-            <button class="feature-demo-btn">Get a demo</button>
+            <button class="feature-demo-btn" data-demo-open>Get a demo</button>
           </div>
           <div class="feature-image"></div>
         </div>
@@ -632,7 +660,7 @@
             growing revenue — Flametree delivers from<br />
             day&nbsp;one.
           </p>
-          <a href="#contact" class="cta-split__btn">Get a demo</a>
+          <a href="#contact" class="cta-split__btn" data-demo-open>Get a demo</a>
         </div>
 
         <!-- правая половина: SVG-маска -->
@@ -696,28 +724,78 @@
         <p class="foot-copy">© 2025 Flametree Inc. All rights reserved.</p>
       </div>
     </footer>
-    <div id="chat-widget"></div>
+
+    <div class="demo-modal" id="demoModal" aria-hidden="true">
+      <div class="demo-modal__overlay" data-modal-close></div>
+
+      <div class="demo-modal__window" role="dialog" aria-modal="true" aria-labelledby="demoTitle">
+        <button class="demo-modal__close" aria-label="Close" data-modal-close>&times;</button>
+
+        <h2 class="demo-modal__title" id="demoTitle">Book a Demo</h2>
+
+        <form id="demoForm" novalidate>
+          <label class="form-field">
+            <input type="text" name="firstName" placeholder="First name" maxlength="40" required />
+            <span class="error-msg"></span>
+          </label>
+
+          <label class="form-field">
+            <input type="text" name="lastName" placeholder="Last name" maxlength="40" required />
+            <span class="error-msg"></span>
+          </label>
+
+          <label class="form-field">
+            <input type="email" name="email" placeholder="Business e-mail" required />
+            <span class="error-msg"></span>
+          </label>
+
+          <label class="form-field">
+            <textarea
+              name="message"
+              placeholder="Tell us how can we help you?"
+              maxlength="500"
+            ></textarea>
+            <span class="error-msg"></span>
+          </label>
+          <div class="demo-modal__btns">
+            <button type="submit" class="btn-send" disabled>Send</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="chat-widget" style="width: 0; height: 0"></div>
+    <script>
+      window.addEventListener('load', () => {
+        const preloader = document.getElementById('preloader');
+        if (preloader) {
+          preloader.style.opacity = '0';
+          setTimeout(() => preloader.remove(), 600); // дожидаемся анимации
+        }
+      });
+    </script>
     <script type="module" src="/scripts/main.js"></script>
-    <script src="https://portal.flametree.dev.enfint.ai/public-storage/widget/bot-chat-widget.umd.js"></script>
+    <script src="https://portal.flametree.ai/public-storage/widget/bot-chat-widget.umd.js"></script>
     <script>
       BotChatWidget.createBotChat({
-        botRoute:
-          'https://portal.flametree.dev.enfint.ai/chatbot/1bc67e0b-187b-4ab5-b5a3-8455cb0fecde',
+        botRoute: 'https://portal.flametree.ai/chatbot/ed3987f2-99b7-4c8f-a17d-8aedc5cad81f',
         elementId: 'chat-widget',
-        userId: '1bc67e0b-187b-4ab5-b5a3-8455cb0fecde',
-        userName: 'Guest',
+        tooltipText: 'Hi there!✋My name is Flame. I’m here to help you anytime!',
+        userName: ' ',
+        headerTitle: 'Flame',
+        openByDefault: false,
         isFloatingBtn: true,
-        primaryColor: '#ff613e',
+        version: 'v2',
+        multiAgent: false,
+        primaryColor: '#ff3570',
         theme: 'light',
-        showActionsBtn: true,
+        showActionsBtn: false,
         showWaitingMessage: false,
-        authorizationToken: '7B3bCUSDBZ7Z5XIJ5r3q5jQure4kat9ru8wHu5VL3iALB3F2zi',
+        authorizationToken: '80ClsFmLhy7HY44ShdR9fYzucY3pOgnZvqoNUFS4aojiJrCDud',
         voiceOver: false,
         floatingBtnOpennedIconUrl: '',
         floatingBtnClosedIconUrl: '',
         floatingBtnSize: 58,
-        version: 'v2',
-        multiAgent: true,
       });
     </script>
   </body>

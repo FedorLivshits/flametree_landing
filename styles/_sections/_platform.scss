@@ -1,12 +1,17 @@
+/* ============================================================================
+   PLATFORM – sticky-screen + carousel
+   ========================================================================== */
+/* переменные / миксины проекта */
 @use '../variables' as *;
 @use '../mixins' as *;
 
-/* ===== PLATFORM ============================================================= */
+/* ===== PLATFORM ============================================================ */
 .platform {
   background: #1d1d1f;
   padding: clamp(4rem, 9vw, 6rem) 0;
   color: #d1d1d4;
 
+  /* ---------- шапка ------------------------------------------------------- */
   &__header {
     margin-bottom: 5rem;
     display: flex;
@@ -30,23 +35,24 @@
     }
   }
 
+  /* ---------- основной грид ---------------------------------------------- */
   &__inner {
     @include container(1440px);
     display: grid;
     grid-template-columns: minmax(500px, 600px) 1fr;
     column-gap: 4rem;
 
-    /* tablet & mobile → one column */
+    /* tablet & mobile → в одну колонку */
     @media (max-width: 1050px) {
       grid-template-columns: 1fr;
       row-gap: 2.5rem;
     }
   }
 
-  /* ---------- STICKY / FLOATING SCREEN ------------------------------------- */
+  /* ---------- STICKY / FLOATING SCREEN ------------------------------------ */
   &__screen {
     position: sticky;
-    top: calc(var(--header-h, 88px) + 24px);
+    top: calc(var(--header-h, 88px) + 16vh);
     align-self: flex-start;
     min-height: 436px;
 
@@ -60,7 +66,7 @@
       box-shadow: 0 14px 48px rgba(#000, 0.45);
     }
 
-    /* <= 1050 — one column */
+    /* <=1050px — статична и центрируется */
     @media (max-width: 1050px) {
       position: static;
       min-height: auto;
@@ -69,19 +75,24 @@
     }
   }
 
-  /* ---------- STEPS -------------------------------------------------------- */
+  /* ---------- STEPS / КАРТОЧКИ ------------------------------------------- */
   &__steps {
     display: flex;
     flex-direction: column;
     gap: 2.5rem;
 
+    /* ≤1050px — горизонтальная лента с «магнитом» */
     @media (max-width: 1050px) {
       flex-direction: row;
       overflow-x: auto;
-      scroll-snap-type: x mandatory;
       gap: 1.5rem;
       padding-bottom: 1.5rem;
-      scrollbar-width: none; // Firefox
+
+      /* === scroll-snap magic === */
+      scroll-snap-type: x mandatory; /* «прилипание» */
+      scroll-padding-inline: 1.5rem; /* учитываем left/right gap */
+
+      scrollbar-width: none; /* Firefox */
       &::-webkit-scrollbar {
         display: none;
       }
@@ -89,6 +100,7 @@
   }
 
   .step {
+    /* размеры / оформление */
     list-style: none;
     background: #323232;
     border-radius: 14px;
@@ -96,20 +108,26 @@
     padding: 2.5rem 2rem;
     display: flex;
     flex-direction: column;
-    opacity: 0.4;
-    transition: opacity 0.35s ease-in-out;
-    scroll-snap-align: start;
 
+    /* анимация «затухания» для неактивных */
+    opacity: 0.4;
+    scale: 0.9;
+    transition:
+      opacity 0.35s ease-in-out,
+      scale 0.35s ease-in-out;
+
+    /* состояние активной карточки */
     &.is-active {
       opacity: 1;
+      scale: 1;
     }
 
+    /* содержание карточки -------------------------------------------------- */
     &__body {
       display: flex;
       flex-direction: column;
       height: 100%;
     }
-
     &__num {
       display: inline-grid;
       place-content: center;
@@ -140,19 +158,27 @@
       color: #8c8c91;
     }
 
+    /* —— mobile tweaks —— */
     @media (max-width: 1050px) {
+      background: transparent; /* фон убираем — остаётся у родителя */
       min-height: 240px;
       min-width: 80%;
       flex: 0 0 80%;
       padding: 1.5rem 1rem 1.75rem;
-      background: transparent;
-      opacity: 1;
+
+      /* scroll-snap на саму карточку */
+      scroll-snap-align: center; /* центр карточки прилипает */
+      scroll-snap-stop: always; /* не «перескакивает» две за раз */
+      opacity: 1; /* «затухание» отключаем */
+      scale: 1; /* и масштаб */
     }
   }
 
+  /* ---------- НАВИГАЦИЯ (кнопки / точки) --------------------------------- */
   &__carousel-nav {
     display: none;
 
+    /* отрисовываем только ≤1050px */
     @media (max-width: 1050px) {
       margin-top: 0.5rem;
       display: flex;
@@ -163,7 +189,6 @@
   .plat-btns {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     gap: 16px;
   }
 
@@ -199,7 +224,10 @@
       border-radius: 50%;
       background: #777;
       opacity: 0.5;
-      transition: all 0.25s;
+      transition:
+        width 0.25s,
+        opacity 0.25s,
+        border-radius 0.25s;
 
       &.is-active {
         width: 28px;
@@ -210,6 +238,7 @@
   }
 }
 
+/* ---------- порядок колонок на desktop / mobile --------------------------- */
 @media (min-width: 1051px) {
   .platform__steps {
     order: 1;
