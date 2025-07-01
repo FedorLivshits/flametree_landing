@@ -40,7 +40,10 @@
 .feature-image {
   border-radius: $border-radius-xl;
   padding: 3rem 2.5rem 2rem;
-  background-image: url('/assets/images/feature-bg.png');
+  background-image: image-set(
+    url('/assets/images/optimized/feature-bg.webp') type('image/webp'),
+    url('/assets/images/feature-bg.png') type('image/png')
+  );
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
