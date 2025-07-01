@@ -1,3 +1,9 @@
+requestAnimationFrame(() => {
+  requestAnimationFrame(() => {
+    document.documentElement.classList.add('js-loaded');
+  });
+});
+
 /* 1. SCSS бандл */
 import '../styles/main.scss';
 
@@ -44,6 +50,8 @@ function initParallax() {
   };
 
   window.addEventListener('scroll', parallax, { passive: true });
+
+  parallax();
 }
 
 /* 6. --- Headline animation --------------------------------- */
@@ -216,6 +224,36 @@ function initTestimonialsSlider() {
   toggleMode(mq);
 }
 
+function loadBotWidget() {
+  const script = document.createElement('script');
+  script.src = 'https://portal.flametree.ai/public-storage/widget/bot-chat-widget.umd.js';
+  script.async = true;
+  script.onload = () => {
+    window.BotChatWidget?.createBotChat({
+      botRoute: 'https://portal.flametree.ai/chatbot/ed3987f2-99b7-4c8f-a17d-8aedc5cad81f',
+      elementId: 'chat-widget',
+      tooltipText: 'Hi there!✋My name is Flame. I’m here to help you anytime!',
+      userName: ' ',
+      headerTitle: 'Flame',
+      openByDefault: false,
+      isFloatingBtn: true,
+      version: 'v2',
+      multiAgent: false,
+      primaryColor: '#f96c15',
+      theme: 'light',
+      showActionsBtn: false,
+      showWaitingMessage: false,
+      authorizationToken: '80ClsFmLhy7HY44ShdR9fYzucY3pOgnZvqoNUFS4aojiJrCDud',
+      voiceOver: false,
+      floatingBtnOpennedIconUrl: '',
+      floatingBtnClosedIconUrl: '',
+      floatingBtnSize: 58,
+    });
+  };
+  script.onerror = () => console.error('Не удалось загрузить виджет');
+  document.body.appendChild(script);
+}
+
 /* 8. --- DOM ready ------------------------------------------ */
 document.addEventListener('DOMContentLoaded', () => {
   initMobileMenu();
@@ -223,6 +261,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initParallax();
   initHeadlineAnimation();
   initTestimonialsSlider();
+  loadBotWidget();
 
   const startGradient = () => initHeroGradient('#gradient-canvas');
 
