@@ -136,7 +136,6 @@
 
 // Mobile menu overlay
 .mobile-menu-overlay {
-  display: none;
   position: fixed;
   top: 0;
   left: 0;
@@ -149,7 +148,6 @@
   transition: all $transition-base;
 
   &.active {
-    display: block;
     opacity: 1;
     visibility: visible;
 
