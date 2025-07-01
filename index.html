@@ -17,6 +17,7 @@
         href="https://fonts.googleapis.com/css2?family=Commissioner:wght@100..900&family=Space+Grotesk:wght@300..700&display=swap"
       />
     </noscript>
+    <link rel="preload" as="image" href="/img/platform-1.png" fetchpriority="high" />
     <style>
       #gradient-canvas {
         width: 100%;
@@ -327,7 +328,7 @@
         <!-- ❷ steps = вертикальный список (desktop) / горизонтальная лента (<=1050)  -->
         <ol class="platform__steps" id="platformSteps">
           <!-- ====== CARD 1 ====== -->
-          <li class="step" data-img="/img/platform-1.png">
+          <li class="step" data-img="/img/platform-1.png" rel="preload">
             <span class="step__num">1</span>
 
             <div class="step__body">

@@ -8,12 +8,34 @@
 
   if (!steps.length || !screenImg) return;
 
+  /* ---------- Настройки ---------- */
   const mqMobile = window.matchMedia('(max-width:1050px)');
   let index = 0;
 
-  const setActive = (i) => {
+  /* ---------- Кеш картинок ---------- */
+  const cache = new Map(); // url -> Promise<HTMLImageElement>
+
+  function preload(src) {
+    if (!cache.has(src)) {
+      cache.set(
+        src,
+        new Promise((resolve) => {
+          const img = new Image();
+          img.src = src;
+          img.onload = () => resolve(img);
+        })
+      );
+    }
+    return cache.get(src);
+  }
+
+  /* заранее качаем ВСЕ картинки */
+  steps.forEach((s) => preload(s.dataset.img));
+
+  /* ---------- Отрисовка активного шага ---------- */
+  async function setActive(i) {
     if (steps[index]) steps[index].classList.remove('is-active');
-    if (dotsBox?.children[index]) dotsBox.children[index].classList.remove('is-active');
+    dotsBox?.children[index]?.classList.remove('is-active');
 
     index = (i + steps.length) % steps.length;
 
@@ -21,16 +43,17 @@
     dotsBox?.children[index]?.classList.add('is-active');
 
     const newSrc = steps[index].dataset.img;
-    const currentSrc = screenImg.getAttribute('src');
+    if (!newSrc || newSrc === screenImg.src) return;
 
-    if (newSrc && newSrc !== currentSrc) {
-      screenImg.style.opacity = 0;
-      setTimeout(() => {
-        screenImg.setAttribute('src', newSrc);
-      }, 350);
-    }
-  };
+    screenImg.style.opacity = 0; // гасим старый скрин
 
+    const img = await preload(newSrc); // ждём, пока новый скрин декодируется
+    screenImg.src = img.src;
+    screenImg.onload = null; // сброс
+    screenImg.style.opacity = 1; // плавно показываем
+  }
+
+  /* ---------- Точки ---------- */
   if (dotsBox) {
     steps.forEach((_, i) => {
       const d = document.createElement('span');
@@ -39,66 +62,62 @@
     });
   }
 
-  const scrollToCard = (i) => {
+  /* ---------- Прокрутка ленты ---------- */
+  function scrollToCard(i) {
     const cardW = steps[0].offsetWidth + parseFloat(getComputedStyle(stepsWrap).gap || 0);
-    stepsWrap.scrollTo({ left: cardW * i, behavior: 'smooth' });
-  };
+    stepsWrap.scrollTo({ left: cardW * ((i + steps.length) % steps.length), behavior: 'smooth' });
+  }
 
   btnPrev?.addEventListener('click', () => scrollToCard(index - 1));
   btnNext?.addEventListener('click', () => scrollToCard(index + 1));
 
-  // --- Desktop intersection observer
+  /* ---------- Desktop: IntersectionObserver ---------- */
   const ioDesktop = new IntersectionObserver(
-    (entries) => {
+    (entries) =>
       entries.forEach((ent) => {
         if (ent.isIntersecting && !mqMobile.matches) {
           setActive(steps.indexOf(ent.target));
         }
-      });
-    },
+      }),
     { threshold: 0.6, rootMargin: '0px 0px -40% 0px' }
   );
   steps.forEach((s) => ioDesktop.observe(s));
 
-  // --- Mobile scroll handler
+  /* ---------- Mobile: scroll-sync ---------- */
   stepsWrap.addEventListener(
     'scroll',
     throttle(() => {
       if (!mqMobile.matches) return;
 
-      const scrollCenter = stepsWrap.scrollLeft + stepsWrap.offsetWidth / 2;
-
-      let closestIndex = 0;
-      let closestDistance = Infinity;
+      const center = stepsWrap.scrollLeft + stepsWrap.offsetWidth / 2;
+      let bestI = 0;
+      let bestD = Infinity;
 
       steps.forEach((card, i) => {
-        const cardCenter = card.offsetLeft + card.offsetWidth / 2;
-        const distance = Math.abs(cardCenter - scrollCenter);
-        if (distance < closestDistance) {
-          closestDistance = distance;
-          closestIndex = i;
+        const d = Math.abs(card.offsetLeft + card.offsetWidth / 2 - center);
+        if (d < bestD) {
+          bestD = d;
+          bestI = i;
         }
       });
 
-      if (closestIndex !== index) setActive(closestIndex);
+      if (bestI !== index) setActive(bestI);
     }, 100),
     { passive: true }
   );
 
-  screenImg.onload = () => {
-    screenImg.style.opacity = 1;
-  };
-
+  /* ---------- Вспом. функции ---------- */
   function throttle(fn, wait) {
-    let lastTime = 0;
+    let last = 0;
     return (...args) => {
       const now = Date.now();
-      if (now - lastTime >= wait) {
-        lastTime = now;
+      if (now - last >= wait) {
+        last = now;
         fn(...args);
       }
     };
   }
 
+  /* ---------- Инициализация ---------- */
   setActive(0);
 })();
