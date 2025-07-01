@@ -28,9 +28,6 @@
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  padding: 1.75rem $spacing-xl;
-  border: 1px solid #d4d6d8;
-  border-radius: $border-radius-round;
 
   @include tablet {
     border: none;
@@ -46,12 +43,8 @@
   img {
     max-width: 120px;
     height: auto;
-    opacity: 0.68;
+    opacity: 1;
     transition: opacity 0.25s;
-
-    &:hover {
-      opacity: 1;
-    }
 
     @include tablet {
       max-width: 110px;

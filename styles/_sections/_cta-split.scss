@@ -1,28 +1,22 @@
-/* ==============================================================
-   Orange 50/50 call-to-action                       _cta-split.scss
-   ============================================================== */
 @use '../variables' as *;
 @use '../mixins' as *;
 
-/* ---------- базовая секция (desktop ≥ 1281 px) ---------- */
 .cta-split {
-  background: #ff9509; // яркий оранжевый
+  background: #ff9509;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 3.5rem 2.5rem;
 
-  /* FLEX-обёртка = две половины */
   &__wrap {
     width: 100%;
     max-width: 1440px;
     display: flex;
-    height: 528px; // равная высота панелей
+    height: 528px;
     border-radius: $border-radius-lg;
     overflow: hidden;
   }
 
-  /* ----- левая белая панель ----- */
   &__left {
     flex: 1 1 50%;
     background: #fff;
@@ -35,24 +29,23 @@
     font-family: $font-family-primary;
     font-weight: 700;
     margin: 0 0 1.25rem;
-    font-size: 3rem; // 48 px при ≥ 1440
+    font-size: 3rem;
     line-height: 1.1;
   }
 
   &__lead {
-    font-size: 1.5rem; // 24 px
+    font-size: 1.5rem;
     line-height: 1.6;
     color: $color-gray-dark;
     margin: 0 0 3rem;
   }
 
   &__btn {
+    @include button-dark;
     margin-top: auto;
     text-decoration: none;
     font-size: 1.125rem;
     line-height: 1.35;
-    background: #000;
-    color: #fff;
     font-weight: 600;
     padding: 1.25rem 2.5rem;
     border-radius: 1.25rem;
@@ -67,7 +60,6 @@
     }
   }
 
-  /* ----- правая половина с SVG-паттерном ----- */
   &__right {
     flex: 1 1 50%;
     position: relative;
@@ -80,7 +72,6 @@
   }
 }
 
-/* ============ типографика 1280 – 901 px ============ */
 @media (max-width: 1280px) and (min-width: 901px) {
   .cta-split {
     &__left {
@@ -100,14 +91,13 @@
   }
 }
 
-/* ============ планшеты ≤ 900 px ============ */
 @media (max-width: 900px) {
   .cta-split {
     padding: 3rem 1rem;
-    height: auto; // не ограничиваем 100 vh
+    height: auto;
 
     &__wrap {
-      flex-direction: column; // панели одна под другой
+      flex-direction: column;
       height: auto;
     }
 
@@ -119,7 +109,7 @@
 
     &__right {
       display: none;
-    } // ⟵ SVG-паттерн убираем
+    }
 
     &__title {
       font-size: 2.25rem;
@@ -134,7 +124,6 @@
   }
 }
 
-/* ============ телефоны ≤ 576 px ============ */
 @media (max-width: 576px) {
   .cta-split {
     padding: 2.5rem 1rem;
@@ -144,7 +133,7 @@
     }
 
     &__title {
-      font-size: 1.75rem; // ~28 px
+      font-size: 1.75rem;
       margin-bottom: 1rem;
     }
 

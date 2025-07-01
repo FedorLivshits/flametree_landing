@@ -63,7 +63,7 @@
       border-radius: 12px;
       display: block;
       transition: opacity 0.35s;
-      box-shadow: 0 14px 48px rgba(#000, 0.45);
+      box-shadow: 0 10px 32px rgba(255, 255, 255, 0.15);
     }
 
     /* <=1050px — статична и центрируется */
@@ -160,7 +160,6 @@
 
     /* —— mobile tweaks —— */
     @media (max-width: 1050px) {
-      background: transparent; /* фон убираем — остаётся у родителя */
       min-height: 240px;
       min-width: 80%;
       flex: 0 0 80%;

@@ -1,6 +1,3 @@
-/* ============================================================================
-   PLATFORM – sticky-screen + carousel (desktop / tablet / mobile)
-   ========================================================================== */
 (() => {
   const steps = [...document.querySelectorAll('.platform .step')];
   const screenImg = document.querySelector('.platform__screen .screen-img');
@@ -8,32 +5,32 @@
   const dotsBox = document.querySelector('.plat-dots');
   const btnPrev = document.querySelector('.plat-btn.prev');
   const btnNext = document.querySelector('.plat-btn.next');
+
   if (!steps.length || !screenImg) return;
 
-  /* -------------------------------------------------- helpers */
   const mqMobile = window.matchMedia('(max-width:1050px)');
   let index = 0;
 
   const setActive = (i) => {
-    steps[index].classList.remove('is-active');
-    dotsBox?.children[index]?.classList.remove('is-active');
+    if (steps[index]) steps[index].classList.remove('is-active');
+    if (dotsBox?.children[index]) dotsBox.children[index].classList.remove('is-active');
 
     index = (i + steps.length) % steps.length;
 
     steps[index].classList.add('is-active');
     dotsBox?.children[index]?.classList.add('is-active');
 
-    /* fade-смена картинки */
     const newSrc = steps[index].dataset.img;
-    if (newSrc && newSrc !== screenImg.src) {
+    const currentSrc = screenImg.getAttribute('src');
+
+    if (newSrc && newSrc !== currentSrc) {
       screenImg.style.opacity = 0;
       setTimeout(() => {
-        screenImg.src = newSrc;
+        screenImg.setAttribute('src', newSrc);
       }, 350);
     }
   };
 
-  /* -------------------------------------------------- dots / arrows (<=1050) */
   if (dotsBox) {
     steps.forEach((_, i) => {
       const d = document.createElement('span');
@@ -50,48 +47,58 @@
   btnPrev?.addEventListener('click', () => scrollToCard(index - 1));
   btnNext?.addEventListener('click', () => scrollToCard(index + 1));
 
-  /* -------------------------------------------------- observers */
-  /* desktop: intersection-observer */
+  // --- Desktop intersection observer
   const ioDesktop = new IntersectionObserver(
     (entries) => {
       entries.forEach((ent) => {
-        if (ent.isIntersecting && !mqMobile.matches) setActive(steps.indexOf(ent.target));
+        if (ent.isIntersecting && !mqMobile.matches) {
+          setActive(steps.indexOf(ent.target));
+        }
       });
     },
     { threshold: 0.6, rootMargin: '0px 0px -40% 0px' }
   );
   steps.forEach((s) => ioDesktop.observe(s));
 
-  /* mobile: scroll listener on horizontal list */
+  // --- Mobile scroll handler
   stepsWrap.addEventListener(
     'scroll',
     throttle(() => {
       if (!mqMobile.matches) return;
-      const scrollX = stepsWrap.scrollLeft + stepsWrap.offsetWidth * 0.5;
-      const cardW = steps[0].offsetWidth + parseFloat(getComputedStyle(stepsWrap).gap || 0);
-      const i = Math.round(scrollX / cardW) - 1;
-      if (i !== index) setActive(i);
+
+      const scrollCenter = stepsWrap.scrollLeft + stepsWrap.offsetWidth / 2;
+
+      let closestIndex = 0;
+      let closestDistance = Infinity;
+
+      steps.forEach((card, i) => {
+        const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+        const distance = Math.abs(cardCenter - scrollCenter);
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closestIndex = i;
+        }
+      });
+
+      if (closestIndex !== index) setActive(closestIndex);
     }, 100),
     { passive: true }
   );
 
-  /* on img load restore opacity */
   screenImg.onload = () => {
     screenImg.style.opacity = 1;
   };
 
-  /* -------------------------------------------------- utils */
   function throttle(fn, wait) {
-    let t = 0;
-    return (...a) => {
+    let lastTime = 0;
+    return (...args) => {
       const now = Date.now();
-      if (now - t >= wait) {
-        t = now;
-        fn(...a);
+      if (now - lastTime >= wait) {
+        lastTime = now;
+        fn(...args);
       }
     };
   }
 
-  /* init */
   setActive(0);
 })();

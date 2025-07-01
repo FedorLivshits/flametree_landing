@@ -97,7 +97,6 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault();
     if (!validate()) return;
 
-    // Replace this with real API call
     // alert('Demo request sent!');
 
     closeModal();

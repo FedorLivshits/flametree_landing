@@ -6,100 +6,151 @@
   height: 100vh;
   max-height: 750px;
   position: relative;
-  background: $color-gray-darkest;
-  color: #6d727a;
   overflow: hidden;
-  background-image: url('/assets/images/grid.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
 
+  background: $color-gray-darkest url('/assets/images/grid.png') center/cover no-repeat;
+  color: #6d727a;
+
+  /* ---------- subtitle ---------- */
   &__subtitle {
     @include eyebrow-text;
-    margin-bottom: 4rem;
-    margin-top: 5rem;
+    margin: 5rem auto 4rem;
     text-align: center;
   }
 
+  /* ---------- headline wrapper ---------- */
   &__center {
     max-width: 1077px;
-    margin-inline: auto;
+    margin: 0 auto;
     padding-inline: 1rem;
   }
 
+  /* ---------- headline (multi-line) ---------- */
   &__headline {
     @include container(1077px);
+
+    /* desktop: крупный */
     @include responsive-font(2.5rem, 3.5rem, 1.1, 1.15);
     font-weight: 600;
+    text-align: left;
+    margin-left: 56px;
     position: relative;
     z-index: 3;
     transition: color 0.4s ease;
-    text-align: left;
-    margin-left: 56px;
 
-    @include tablet {
+    @include small-laptop {
+      @include container(750px);
+      @include responsive-font(2.2rem, 2.4rem, 1.15, 1.2);
       margin-left: 0;
-      padding: 0;
+    }
+
+    /* tablet */
+    @include tablet {
+      @include responsive-font(1.9rem, 2.4rem, 1.15, 1.2);
+      margin-left: 0;
+    }
+
+    /* mobile */
+    @include mobile {
+      @include responsive-font(1.9rem, 2rem, 1.2, 1.25);
+      padding-inline: 0.5rem;
     }
   }
 
+  /* ---------- container for parallax images ---------- */
   &__inner {
     position: relative;
     max-width: 1920px;
     z-index: 2;
   }
 
-  // Parallax images
+  /* ---------- parallax images ---------- */
   &__illus {
     position: absolute;
     z-index: 1;
 
     img {
-      width: 100%;
+      width: 200px;
       display: block;
       border-radius: $border-radius-md;
       filter: grayscale(100%) contrast(1.2);
-      opacity: 0.85;
+
+      @include small-laptop {
+        width: 150px;
+        opacity: 0.6;
+      }
+
+      @include tablet {
+        width: 130px;
+      }
+      @include mobile {
+        width: 100px;
+      }
     }
 
+    /* — left image — */
     &--l {
       top: 80%;
       left: 0%;
       width: min(28vw, 240px);
 
+      @media (max-width: 1300px) {
+        left: -10%;
+      }
+
+      @include small-laptop {
+        top: 85%;
+        width: 150px;
+      }
+
       @include tablet {
-        left: 3%;
-        top: 14%;
-        width: 34vw;
+        width: 130px;
+      }
+      @include mobile {
+        top: 20%;
+        left: -10%;
+        width: 100px;
       }
     }
 
+    /* — right/top image — */
     &--r {
       bottom: 750px;
       right: 0%;
 
       @include tablet {
-        right: 3%;
-        top: 4%;
-        width: 34vw;
+        top: 5%;
+        right: -6%;
+        width: 150px;
+      }
+      @include mobile {
+        top: 8%;
+        right: -10%;
+        width: 110px;
       }
     }
 
+    /* — bottom/right image — */
     &--b {
-      bottom: 20%;
-      right: 30%;
-      width: min(30vw, 280px);
+      bottom: -40px;
+      right: 7%;
+      width: 161px;
 
       @include tablet {
-        right: 8%;
         bottom: -6%;
-        width: 40vw;
+        right: 5%;
+        width: 130px;
+      }
+      @include mobile {
+        bottom: -8%;
+        right: 3%;
+        width: 100px;
       }
     }
   }
 }
 
-// Headline animation states
+/* ---------- headline animation ---------- */
 .headline-line {
   display: block;
   color: #4b4b4b;

@@ -5,11 +5,12 @@ import '../styles/main.scss';
  *    (мы добавляли её в предыдущем шаге) */
 import { initHeroGradient } from './components/gradient.js';
 import './components/scrollSteps.js';
-import './components/lenis-init.js';
+import { lenis } from './components/lenis-init.js';
 import './components/demo-modal.js';
 
 /* 3. --- Mobile-menu helpers -------------------------------- */
 function toggleMobileMenu() {
+  document.body.style.overflow = 'hidden';
   document.querySelector('.mobile-menu-overlay')?.classList.toggle('active');
 }
 function closeMobileMenu() {
@@ -18,12 +19,10 @@ function closeMobileMenu() {
 
 /* 4. --- Mobile-menu init ----------------------------------- */
 function initMobileMenu() {
-  /* Esc → закрыть */
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeMobileMenu();
   });
 
-  /* body-scroll lock */
   const menuOverlay = document.querySelector('.mobile-menu-overlay');
   if (menuOverlay) {
     new MutationObserver((m) => {
@@ -65,15 +64,19 @@ function initHeadlineAnimation() {
 
 /* === Use-Cases slider ===================================== */
 function initUseCasesSlider() {
-  const track = document.querySelector('.uc-track');
+  const viewport = document.querySelector('.uc-viewport'); // ⬅️ scroll-контейнер
+  const track = viewport?.querySelector('.uc-track');
   const btnPrev = document.querySelector('.uc-btn.prev');
   const btnNext = document.querySelector('.uc-btn.next');
   const dotsBox = document.querySelector('.uc-dots');
-  if (!track || !btnPrev || !btnNext || !dotsBox) return;
+  if (!viewport || !track || !btnPrev || !btnNext || !dotsBox) return;
 
+  /* ---------- helpers ------------------------------------ */
   const cards = [...track.children];
+  const cardW = () =>
+    cards[0].getBoundingClientRect().width + parseFloat(getComputedStyle(track).gap || 0);
 
-  /* --- dots --- */
+  /* ---------- dots --------------------------------------- */
   cards.forEach((_, i) => {
     const dot = document.createElement('span');
     dot.addEventListener('click', () => goTo(i));
@@ -82,103 +85,135 @@ function initUseCasesSlider() {
   const dots = [...dotsBox.children];
   dots[0].classList.add('is-active');
 
-  /* helpers */
-  const cardW = () =>
-    cards[0].getBoundingClientRect().width + parseFloat(getComputedStyle(track).gap);
-
+  /* ---------- navigation --------------------------------- */
   let idx = 0;
+  const mq = window.matchMedia('(max-width: 767px)');
+
   const updateDesktop = () => {
     track.style.transform = `translateX(${-idx * cardW()}px)`;
     dots.forEach((d, i) => d.classList.toggle('is-active', i === idx));
   };
+
+  const onScroll = () => {
+    const i = Math.round(viewport.scrollLeft / cardW());
+    if (i !== idx) {
+      idx = i;
+      dots.forEach((d, k) => d.classList.toggle('is-active', k === idx));
+    }
+  };
+
   const goTo = (i) => {
     idx = (i + cards.length) % cards.length;
-    updateDesktop();
+    if (mq.matches) {
+      viewport.scrollTo({
+        left: idx * cardW(),
+        behavior: 'smooth',
+      });
+    } else {
+      updateDesktop();
+    }
   };
 
-  /* buttons */
   btnPrev.addEventListener('click', () => goTo(idx - 1));
   btnNext.addEventListener('click', () => goTo(idx + 1));
-  window.addEventListener('resize', updateDesktop, { passive: true });
 
-  /* mobile scroll-sync */
-  const mq = window.matchMedia('(max-width: 767px)');
-  const onScroll = () => {
-    const i = Math.round(track.scrollLeft / cardW());
-    dots.forEach((d, k) => d.classList.toggle('is-active', k === i));
-  };
-  const toggleMode = (e) => {
-    if (e.matches) {
+  const toggleMode = ({ matches }) => {
+    if (matches) {
       // mobile
       track.style.transform = 'none';
-      track.addEventListener('scroll', onScroll, { passive: true });
+      viewport.addEventListener('scroll', onScroll, { passive: true });
       onScroll();
     } else {
       // desktop
-      track.removeEventListener('scroll', onScroll);
+      viewport.removeEventListener('scroll', onScroll);
       updateDesktop();
     }
   };
   mq.addEventListener('change', toggleMode);
   toggleMode(mq);
+
+  window.addEventListener(
+    'resize',
+    () => {
+      if (!mq.matches) updateDesktop();
+    },
+    { passive: true }
+  );
 }
 
 /* 7. --- Testimonials slider -------------------------------- */
 function initTestimonialsSlider() {
-  const track = document.querySelector('.t-track');
+  const viewport = document.querySelector('.t-viewport');
+  const track = viewport?.querySelector('.t-track');
   const btnPrev = document.querySelector('.t-btn.prev');
   const btnNext = document.querySelector('.t-btn.next');
   const dotsBox = document.querySelector('.t-dots');
-  if (!track || !btnPrev || !btnNext || !dotsBox) return;
+  if (!viewport || !track || !btnPrev || !btnNext || !dotsBox) return;
 
+  /* ---------- dots ---------- */
   const cards = [...track.children];
-  const makeDot = (i) => {
+  cards.forEach((_, i) => {
     const dot = document.createElement('span');
     dot.addEventListener('click', () => goTo(i));
-    return dot;
-  };
-  dotsBox.append(...cards.map((_, i) => makeDot(i)));
+    dotsBox.appendChild(dot);
+  });
   const dots = [...dotsBox.children];
+  dots[0].classList.add('is-active');
 
-  /* ----------  Desktop режим  ---------- */
-  let idx = 0; // текущий слайд
+  let idx = 0;
   const cardW = () =>
-    cards[0].getBoundingClientRect().width + parseFloat(getComputedStyle(track).gap);
+    cards[0].getBoundingClientRect().width + parseFloat(getComputedStyle(track).gap || 0);
 
+  const mq = window.matchMedia('(max-width: 1023px)');
+
+  /* ---------- Desktop ---------- */
   const updateDesktop = () => {
     track.style.transform = `translateX(${-idx * cardW()}px)`;
     dots.forEach((d, i) => d.classList.toggle('is-active', i === idx));
   };
+
+  /* ---------- Mobile / Tablet ---------- */
+  const onScroll = () => {
+    const i = Math.round(viewport.scrollLeft / cardW());
+    if (i !== idx) {
+      idx = i;
+      dots.forEach((d, k) => d.classList.toggle('is-active', k === idx));
+    }
+  };
+
   const goTo = (i) => {
     idx = (i + cards.length) % cards.length;
-    updateDesktop();
+    if (mq.matches) {
+      viewport.scrollTo({ left: idx * cardW(), behavior: 'smooth' });
+    } else {
+      updateDesktop();
+    }
   };
 
+  /* ---------- listeners ---------- */
   btnPrev.addEventListener('click', () => goTo(idx - 1));
   btnNext.addEventListener('click', () => goTo(idx + 1));
-  window.addEventListener('resize', updateDesktop, { passive: true });
 
-  /* ----------  Мобильный режим  ---------- */
-  const mq = window.matchMedia('(max-width: 767px)');
-  const onScroll = () => {
-    const i = Math.round(track.scrollLeft / cardW());
-    dots.forEach((d, k) => d.classList.toggle('is-active', k === i));
-  };
+  window.addEventListener(
+    'resize',
+    () => {
+      if (!mq.matches) updateDesktop();
+    },
+    { passive: true }
+  );
 
-  const toggleMode = (e) => {
-    if (e.matches) {
-      // мобильный
+  const toggleMode = ({ matches }) => {
+    if (matches) {
       track.style.transform = 'none';
-      track.addEventListener('scroll', onScroll, { passive: true });
-      onScroll(); // инициализируем точки
+      viewport.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
     } else {
-      // десктоп
-      track.removeEventListener('scroll', onScroll);
+      viewport.removeEventListener('scroll', onScroll);
       updateDesktop();
     }
   };
   mq.addEventListener('change', toggleMode);
-  toggleMode(mq); // первичный вызов
+  toggleMode(mq);
 }
 
 /* 8. --- DOM ready ------------------------------------------ */
@@ -189,14 +224,26 @@ document.addEventListener('DOMContentLoaded', () => {
   initHeadlineAnimation();
   initTestimonialsSlider();
 
-  /* --- WebGL-градиент --- */
   const startGradient = () => initHeroGradient('#gradient-canvas');
 
   if ('requestIdleCallback' in window) {
     requestIdleCallback(startGradient, { timeout: 1500 });
   } else {
-    setTimeout(startGradient, 800); // fallback
+    setTimeout(startGradient, 800);
   }
+
+  document.querySelectorAll('a[href^="#"]').forEach((link) => {
+    const targetId = link.getAttribute('href');
+    const target = document.querySelector(targetId);
+
+    if (target) {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        lenis.scrollTo(target, { offset: -88 });
+        closeMobileMenu();
+      });
+    }
+  });
 });
 
 window.toggleMobileMenu = toggleMobileMenu;

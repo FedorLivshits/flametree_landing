@@ -68,6 +68,7 @@
 }
 
 .login-btn {
+  @include button-base;
   background: $color-gray;
   border: none;
   border-radius: $border-radius-md;
@@ -78,6 +79,10 @@
 
   @include small-laptop {
     display: none;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
   }
 }
 
@@ -97,6 +102,9 @@
     @include small-laptop {
       display: none;
     }
+  }
+  &:hover {
+    transform: translateY(-2px);
   }
 }
 

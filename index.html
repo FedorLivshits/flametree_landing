@@ -5,13 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Flametree | AI Customer Engagement Platform</title>
     <link rel="icon" href="/favicon.ico" sizes="any" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
+      rel="preload"
+      as="style"
       href="https://fonts.googleapis.com/css2?family=Commissioner:wght@100..900&family=Space+Grotesk:wght@300..700&display=swap"
-      rel="stylesheet"
+      onload="this.rel='stylesheet'"
     />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Commissioner:wght@100..900&family=Space+Grotesk:wght@300..700&display=swap"
+      />
+    </noscript>
     <style>
+      #gradient-canvas {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
       #preloader {
         position: fixed;
         inset: 0;
@@ -24,7 +35,7 @@
       }
 
       .preloader__logo {
-        width: 96px;
+        width: 120px;
         height: auto;
         opacity: 0;
         animation: fadeIn 1s forwards 0.2s;
@@ -46,27 +57,27 @@
       <div class="container">
         <div class="header-content">
           <button class="mobile-menu" onclick="toggleMobileMenu()">
-            <img src="/assets/icons/hamburger.svg" alt="" />
+            <img src="/assets/icons/hamburger.svg" alt="" role="presentation" />
           </button>
 
           <a href="#" class="logo">
             <img src="/assets/images/logo.svg" alt="Logo" />
           </a>
 
-          <nav class="nav">
-            <a href="#">platform</a>
-            <a href="#">solutions</a>
-            <a href="#">pricing</a>
-            <a href="#">resources</a>
-            <a href="#">about</a>
+          <nav class="nav" aria-label="Main">
+            <a href="#platform">Platform</a>
+            <a href="#use-cases">Solutions</a>
+            <a href="#features">About</a>
+            <a href="#faq">Resources</a>
+            <a href="#">Prices</a>
           </nav>
 
           <div class="auth-buttons">
-            <button class="login-btn">Login</button>
-            <button class="signup-btn">
+            <a class="login-btn" href="https://portal.flametree.ai/" target="_blank">Login</a>
+            <a class="signup-btn" href="https://portal.flametree.ai/" target="_blank">
               <span class="signup-text">Sign Up</span>
-              <img class="signup-icon" src="/assets/icons/sign-in.svg" alt="" />
-            </button>
+              <img class="signup-icon" src="/assets/icons/sign-in.svg" alt="" role="presentation" />
+            </a>
           </div>
         </div>
       </div>
@@ -80,19 +91,19 @@
           <button class="mobile-menu-close" onclick="closeMobileMenu()">×</button>
         </div>
 
-        <nav class="mobile-nav">
-          <a href="#" onclick="closeMobileMenu()">platform</a>
-          <a href="#" onclick="closeMobileMenu()">solutions</a>
-          <a href="#" onclick="closeMobileMenu()">pricing</a>
-          <a href="#" onclick="closeMobileMenu()">resources</a>
-          <a href="#" onclick="closeMobileMenu()">about</a>
+        <nav class="mobile-nav" aria-label="Main">
+          <a href="#platform" onclick="closeMobileMenu()">Platform</a>
+          <a href="#use-cases" onclick="closeMobileMenu()">Solutions</a>
+          <a href="#features" onclick="closeMobileMenu()">About</a>
+          <a href="#faq" onclick="closeMobileMenu()">Resources</a>
+          <a href="#" onclick="closeMobileMenu()">Prices</a>
         </nav>
 
         <div class="mobile-auth-buttons">
-          <button class="login-btn">Login</button>
-          <button class="signup-btn">
+          <a class="login-btn" href="https://portal.flametree.ai/" target="_blank">Login</a>
+          <a class="signup-btn" href="https://portal.flametree.ai/" target="_blank">
             <span>Sign Up</span>
-          </button>
+          </a>
         </div>
       </div>
     </div>
@@ -100,7 +111,7 @@
     <section class="hero">
       <div class="container hero-container">
         <div class="hero-background">
-          <canvas id="gradient-canvas"></canvas>
+          <canvas id="gradient-canvas" width="1920" height="1080"></canvas>
           <!-- Content -->
           <div class="hero-content">
             <div class="content-box">
@@ -111,8 +122,10 @@
               </p>
 
               <div class="cta-buttons">
-                <a href="#" class="btn btn-primary">Try for free</a>
-                <a href="#" class="btn btn-secondary" data-demo-open>Get a demo</a>
+                <a href="https://portal.flametree.ai/" target="_blank" class="btn btn-primary"
+                  >Try for free</a
+                >
+                <button class="btn btn-secondary" data-demo-open>Get a demo</button>
               </div>
             </div>
           </div>
@@ -133,8 +146,6 @@
     <!-- Companies Section -->
     <section class="companies">
       <div class="container-md">
-        <h3 class="companies-label">TRUSTED&nbsp;BY:</h3>
-
         <div class="companies-box">
           <img src="/assets/icons/uppersetup.svg" alt="Uppersetup" />
           <img src="/assets/icons/slana.svg" alt="Slana" />
@@ -161,106 +172,92 @@
           <ul class="uc-track">
             <!-- 1 -->
             <li class="use-case-card">
-              <div class="card-header"><span class="card-tag inbound">Inbound</span></div>
+              <div class="card-header"><span class="card-tag inbound">INBOUND</span></div>
               <div class="card-content">
                 <h3 class="card-title">Website Lead Generation</h3>
                 <p class="card-description">
                   Turn visitors into leads with 24/7 AI agents that consult, engage and collect
                   contact details.
                 </p>
-                <a href="#" class="card-link">
-                  Learn more <img src="/assets/icons/use-cases-arrow.svg" alt="" />
-                </a>
+                <a href="#" class="card-link">Learn more</a>
               </div>
             </li>
 
             <!-- 2 -->
             <li class="use-case-card">
-              <div class="card-header"><span class="card-tag outbound">Outbound</span></div>
+              <div class="card-header"><span class="card-tag outbound">OUTBOUND</span></div>
               <div class="card-content">
                 <h3 class="card-title">Cold Lead Conversion</h3>
                 <p class="card-description">
                   Reactivate cold leads via smart outreach — present offers, handle objections and
                   convert.
                 </p>
-                <a href="#" class="card-link">
-                  Learn more <img src="/assets/icons/use-cases-arrow.svg" alt="" />
-                </a>
+                <a href="#" class="card-link">Learn more</a>
               </div>
             </li>
 
             <!-- 3 -->
             <li class="use-case-card">
-              <div class="card-header"><span class="card-tag outbound">Outbound</span></div>
+              <div class="card-header"><span class="card-tag outbound">OUTBOUND</span></div>
               <div class="card-content">
                 <h3 class="card-title">Drop-out Management</h3>
                 <p class="card-description">
                   Win back users who abandoned onboarding — uncover reasons and guide them to
                   completion.
                 </p>
-                <a href="#" class="card-link">
-                  Learn more <img src="/assets/icons/use-cases-arrow.svg" alt="" />
-                </a>
+                <a href="#" class="card-link">Learn more</a>
               </div>
             </li>
 
             <!-- 4 -->
             <li class="use-case-card">
-              <div class="card-header"><span class="card-tag outbound">Outbound</span></div>
+              <div class="card-header"><span class="card-tag outbound">OUTBOUND</span></div>
               <div class="card-content">
                 <h3 class="card-title">Cross-Sell / Up-Sell</h3>
                 <p class="card-description">
                   Uncover client needs and suggest options from pre-approved offerings with clear
                   explanations of benefits, pricing and terms.
                 </p>
-                <a href="#" class="card-link">
-                  Learn more <img src="/assets/icons/use-cases-arrow.svg" alt="" />
-                </a>
+                <a href="#" class="card-link">Learn more</a>
               </div>
             </li>
 
             <!-- 5 -->
             <li class="use-case-card">
-              <div class="card-header"><span class="card-tag inbound">Inbound</span></div>
+              <div class="card-header"><span class="card-tag inbound">INBOUND</span></div>
               <div class="card-content">
                 <h3 class="card-title">Customer Service</h3>
                 <p class="card-description">
                   Answer complex questions instantly, perform operations, escalate when needed — and
                   suggest relevant products at the right moment.
                 </p>
-                <a href="#" class="card-link">
-                  Learn more <img src="/assets/icons/use-cases-arrow.svg" alt="" />
-                </a>
+                <a href="#" class="card-link">Learn more</a>
               </div>
             </li>
 
             <!-- 6 -->
             <li class="use-case-card">
-              <div class="card-header"><span class="card-tag outbound">Outbound</span></div>
+              <div class="card-header"><span class="card-tag outbound">OUTBOUND</span></div>
               <div class="card-content">
                 <h3 class="card-title">Debt Recovery & Collection</h3>
                 <p class="card-description">
                   Automate recovery with timely, two-way outreach — reduce effort and improve
                   repayment rates.
                 </p>
-                <a href="#" class="card-link">
-                  Learn more <img src="/assets/icons/use-cases-arrow.svg" alt="" />
-                </a>
+                <a href="#" class="card-link">Learn more</a>
               </div>
             </li>
 
             <!-- 7 -->
             <li class="use-case-card">
-              <div class="card-header"><span class="card-tag inbound">Inbound</span></div>
+              <div class="card-header"><span class="card-tag inbound">INBOUND</span></div>
               <div class="card-content">
                 <h3 class="card-title">AI & Human Conversation Analysis</h3>
                 <p class="card-description">
                   Gain insights from every interaction — monitor operator performance, improve
                   business processes and enhance your AI agents.
                 </p>
-                <a href="#" class="card-link">
-                  Learn more <img src="/assets/icons/use-cases-arrow.svg" alt="" />
-                </a>
+                <a href="#" class="card-link">Learn more</a>
               </div>
             </li>
           </ul>
@@ -270,10 +267,10 @@
         <div class="uc-controls">
           <div class="uc-nav">
             <button class="uc-btn prev" aria-label="Prev slide">
-              <img src="/assets/icons/t-arrow-right.svg" alt="" />
+              <img src="/assets/icons/t-arrow-right.svg" alt="" role="presentation" />
             </button>
             <button class="uc-btn next" aria-label="Next slide">
-              <img src="/assets/icons/t-arrow-left.svg" alt="" />
+              <img src="/assets/icons/t-arrow-left.svg" alt="" role="presentation" />
             </button>
           </div>
           <div class="uc-dots"></div>
@@ -289,24 +286,25 @@
         <!-- Main copy -->
         <div class="difference__center">
           <h2 class="difference__headline">
-            <span class="headline-line" data-accent="orange">Unlike one-way tools,</span>
-            <span class="headline-line">Flametree uses AI agents</span>
-            <span class="headline-line">with context-aware, adaptive</span>
-            <span class="headline-line">conversations to manage</span>
-            <span class="headline-line">complex communications and</span>
-            <span class="headline-line">move customers forward.</span>
+            <span class="headline-line" data-accent="orange">
+              Unlike one-way communication tools —
+            </span>
+            <span class="headline-line"> as push notifications, bulk emails </span>
+            <span class="headline-line"> or SMS — </span>
+            <span class="headline-line"> Flametree leverages a </span>
+            <span class="headline-line"> two-way conversational approach. </span>
           </h2>
         </div>
         <div class="difference__inner">
           <!-- Parallax décor images -->
           <div class="difference__illus difference__illus--l" data-speed="-0.15">
-            <img src="/assets/images/difference-1.png" alt="" />
+            <img src="/assets/images/difference-3.png" alt="" loading="lazy" />
           </div>
           <div class="difference__illus difference__illus--r" data-speed="0.25">
-            <img src="/assets/images/difference-2.png" alt="" />
+            <img src="/assets/images/difference-1.png" alt="" loading="lazy" />
           </div>
           <div class="difference__illus difference__illus--b" data-speed="0.1">
-            <img src="/assets/images/difference-3.png" alt="" />
+            <img src="/assets/images/difference-2.png" alt="" loading="lazy" />
           </div>
         </div>
       </div>
@@ -323,7 +321,7 @@
       <div class="platform__inner container">
         <!-- ❶ sticky-screen (desktop) / floating screen (<=1050) -->
         <div class="platform__screen" aria-hidden="true">
-          <img src="/img/platform-1.png" alt="Platform UI" class="screen-img" />
+          <img src="/img/platform-1.png" alt="Platform UI" class="screen-img" loading="lazy" />
         </div>
 
         <!-- ❷ steps = вертикальный список (desktop) / горизонтальная лента (<=1050)  -->
@@ -401,10 +399,10 @@
         <div class="platform__carousel-nav">
           <div class="plat-btns">
             <button class="plat-btn prev" aria-label="Prev">
-              <img src="/assets/icons/t-arrow-right.svg" alt="" />
+              <img src="/assets/icons/t-arrow-right.svg" alt="" role="presentation" />
             </button>
             <button class="plat-btn next" aria-label="Next">
-              <img src="/assets/icons/t-arrow-left.svg" alt="" />
+              <img src="/assets/icons/t-arrow-left.svg" alt="" role="presentation" />
             </button>
           </div>
           <div class="plat-dots"></div>
@@ -413,7 +411,7 @@
     </section>
 
     <!-- Features Section -->
-    <section class="features">
+    <section class="features" id="features">
       <div class="container">
         <div class="features-grid">
           <div class="feature-block">
@@ -442,7 +440,7 @@
         <div class="benefits-grid">
           <div class="benefit-item">
             <div class="benefit-icon">
-              <img src="/assets/icons/benefit-1.svg" alt="" />
+              <img src="/assets/icons/benefit-1.svg" alt="" loading="lazy" />
             </div>
             <h4 class="benefit-title">Robust Data Security & Privacy</h4>
             <p class="benefit-description">
@@ -453,7 +451,7 @@
 
           <div class="benefit-item">
             <div class="benefit-icon">
-              <img src="/assets/icons/benefit-2.svg" alt="" />
+              <img src="/assets/icons/benefit-2.svg" alt="" loading="lazy" />
             </div>
             <h4 class="benefit-title">Seamless Integrations</h4>
             <p class="benefit-description">
@@ -464,7 +462,7 @@
 
           <div class="benefit-item">
             <div class="benefit-icon">
-              <img src="/assets/icons/benefit-3.svg" alt="" />
+              <img src="/assets/icons/benefit-3.svg" alt="" loading="lazy" />
             </div>
             <h4 class="benefit-title">Regulatory & Audit Readiness</h4>
             <p class="benefit-description">
@@ -475,7 +473,7 @@
 
           <div class="benefit-item">
             <div class="benefit-icon">
-              <img src="/assets/icons/benefit-4.svg" alt="" />
+              <img src="/assets/icons/benefit-4.svg" alt="" loading="lazy" />
             </div>
             <h4 class="benefit-title">Controlled Agent Behavior</h4>
             <p class="benefit-description">
@@ -521,8 +519,8 @@
             <div class="adv-body">
               <h3 class="adv-title">Model Agnostic<br />Architecture</h3>
               <div class="advantage-description">
-                03 Model Agnostic Architecture Choose the best LLM for your needs — open,
-                proprietary, cloud, or self-hosted. Use GPT, LLaMA, Mixtral, Qwen, and more.
+                Choose the best LLM for your needs — open, proprietary, cloud, or self-hosted. Use
+                GPT, LLaMA, Mixtral, Qwen, and more.
               </div>
             </div>
           </li>
@@ -632,10 +630,10 @@
         <div class="t-controls">
           <div class="t-nav">
             <button class="t-btn prev" aria-label="Prev slide">
-              <img src="/assets/icons/t-arrow-right.svg" alt="" />
+              <img src="/assets/icons/t-arrow-right.svg" alt="" role="presentation" />
             </button>
             <button class="t-btn next" aria-label="Next slide">
-              <img src="/assets/icons/t-arrow-left.svg" alt="" />
+              <img src="/assets/icons/t-arrow-left.svg" alt="" role="presentation" />
             </button>
           </div>
 
@@ -660,7 +658,7 @@
             growing revenue — Flametree delivers from<br />
             day&nbsp;one.
           </p>
-          <a href="#contact" class="cta-split__btn" data-demo-open>Get a demo</a>
+          <button class="cta-split__btn" data-demo-open>Get a demo</button>
         </div>
 
         <!-- правая половина: SVG-маска -->
@@ -712,14 +710,12 @@
     <footer class="site-footer">
       <div class="foot-wrap">
         <img class="foot-logo" src="/assets/images/logo-white.svg" alt="" />
-        <nav class="foot-nav">
-          <a href="#">platform</a>
-          <a href="#">solutions</a>
-          <a href="#">pricing</a>
-          <a href="#">about</a>
-          <a href="#">resources</a>
-          <a href="#">about</a>
-          <a href="#">terms</a>
+        <nav class="foot-nav" aria-label="Main">
+          <a href="#platform" onclick="closeMobileMenu()">Platform</a>
+          <a href="#use-cases" onclick="closeMobileMenu()">Solutions</a>
+          <a href="#features" onclick="closeMobileMenu()">About</a>
+          <a href="#faq" onclick="closeMobileMenu()">Resources</a>
+          <a href="#" onclick="closeMobileMenu()">Prices</a>
         </nav>
         <p class="foot-copy">© 2025 Flametree Inc. All rights reserved.</p>
       </div>
@@ -775,27 +771,34 @@
       });
     </script>
     <script type="module" src="/scripts/main.js"></script>
-    <script src="https://portal.flametree.ai/public-storage/widget/bot-chat-widget.umd.js"></script>
+    <script
+      src="https://portal.flametree.ai/public-storage/widget/bot-chat-widget.umd.js"
+      defer
+    ></script>
     <script>
-      BotChatWidget.createBotChat({
-        botRoute: 'https://portal.flametree.ai/chatbot/ed3987f2-99b7-4c8f-a17d-8aedc5cad81f',
-        elementId: 'chat-widget',
-        tooltipText: 'Hi there!✋My name is Flame. I’m here to help you anytime!',
-        userName: ' ',
-        headerTitle: 'Flame',
-        openByDefault: false,
-        isFloatingBtn: true,
-        version: 'v2',
-        multiAgent: false,
-        primaryColor: '#ff3570',
-        theme: 'light',
-        showActionsBtn: false,
-        showWaitingMessage: false,
-        authorizationToken: '80ClsFmLhy7HY44ShdR9fYzucY3pOgnZvqoNUFS4aojiJrCDud',
-        voiceOver: false,
-        floatingBtnOpennedIconUrl: '',
-        floatingBtnClosedIconUrl: '',
-        floatingBtnSize: 58,
+      window.addEventListener('DOMContentLoaded', () => {
+        if (window.BotChatWidget) {
+          BotChatWidget.createBotChat({
+            botRoute: 'https://portal.flametree.ai/chatbot/ed3987f2-99b7-4c8f-a17d-8aedc5cad81f',
+            elementId: 'chat-widget',
+            tooltipText: 'Hi there!✋My name is Flame. I’m here to help you anytime!',
+            userName: ' ',
+            headerTitle: 'Flame',
+            openByDefault: false,
+            isFloatingBtn: true,
+            version: 'v2',
+            multiAgent: false,
+            primaryColor: '#f96c15',
+            theme: 'light',
+            showActionsBtn: false,
+            showWaitingMessage: false,
+            authorizationToken: '80ClsFmLhy7HY44ShdR9fYzucY3pOgnZvqoNUFS4aojiJrCDud',
+            voiceOver: false,
+            floatingBtnOpennedIconUrl: '',
+            floatingBtnClosedIconUrl: '',
+            floatingBtnSize: 58,
+          });
+        }
       });
     </script>
   </body>
