@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>London Business School</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+      }
+
+      body {
+        background: url('desktop.png') no-repeat center center fixed;
+        background-size: cover;
+        display: flex;
+        flex-direction: column;
+      }
+
+      @media (max-width: 768px) {
+        body {
+          background: url('mobile.png') no-repeat center center fixed;
+          background-size: cover;
+        }
+      }
+
+      header {
+        background: rgba(255, 255, 255, 0.8);
+        padding: 1em;
+        text-align: center;
+      }
+
+      header h1 {
+        margin: 0;
+        color: red;
+        font-size: 1.2em;
+        font-family: sans-serif;
+      }
+
+      main {
+        flex: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Warning: This is a test website for demonstration purposes only</h1>
+    </header>
+    <div id="chat-widget"></div>
+    <script src="https://portal.flametree.ai/public-storage/widget/bot-chat-widget.umd.js"></script>
+    <script>
+      BotChatWidget.createBotChat({
+        botRoute: 'https://portal.flametree.ai/chatbot/b0caa27a-5750-4e52-b23a-ef2edeb81f92',
+        elementId: 'chat-widget',
+        userId: 'b0caa27a-5750-4e52-b23a-ef2edeb81f92',
+        userName: 'Guest',
+        tooltipText: 'Hi there!✋I’m here to help you anytime!',
+        headerTitle: 'Elbi',
+        isFloatingBtn: true,
+        primaryColor: '#ff613e',
+        theme: 'light',
+        showActionsBtn: false,
+        showWaitingMessage: false,
+        authorizationToken: 'HX1q98xf0jf5xqfgf6xBkxt6DNNymgPyfPCXK4mlpuXZG37lgg',
+        voiceOver: false,
+        floatingBtnOpennedIconUrl: '',
+        floatingBtnClosedIconUrl: '',
+        floatingBtnSize: 58,
+      });
+    </script>
+  </body>
+</html>
