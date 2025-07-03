@@ -1,4 +1,4 @@
-// ===== FEATURES SECTION =====
+/* ===== FEATURES SECTION ===== */
 @use '../variables' as *;
 @use '../mixins' as *;
 
@@ -6,20 +6,57 @@
   @include section-padding(3rem, 6rem);
 }
 
+/* делаем родительский грид относительным, чтобы абсолютный элемент в нём работал */
 .features-grid {
+  @include container(1440px);
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
-  @include container(1440px);
   position: relative;
+
+  /* кнопка выносим на уровень .features-grid */
+  .feature-demo-btn-container {
+    position: absolute;
+    /* центрируем по горизонтали между колонками */
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    /* опускаем чуть ниже середины высоты грид-контейнера */
+    z-index: 10;
+    background: $color-white;
+    padding: 1.5rem;
+    border-top-left-radius: $border-radius-xl;
+    border-top-right-radius: $border-radius-xl;
+    @include flex-center;
+    gap: 1rem;
+
+    /* сама кнопка */
+    .feature-demo-btn {
+      @include button-dark;
+      font-weight: 600;
+    }
+  }
 
   @include tablet {
     grid-template-columns: 1fr;
-    grid-auto-rows: auto;
     gap: 0.5rem;
+
+    /* на планшете кнопка всё ещё центральная, над швом между блоками */
+    .feature-demo-btn-container {
+        bottom: auto;
+      /* теперь не static, а абсолютное позиционирование в гриде */
+      position: absolute;
+      /* кнопка на 50% вниз от верха грид-контейнера */
+      top:  calc( (100% - 0.5rem) / 2 - 0.5rem );
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 0.75rem 1rem;
+      border-radius: $border-radius-lg;
+    }
   }
 }
 
+/* === сами блоки === */
 .feature-block {
   background: #e8e8e8;
   border-radius: $border-radius-xl;
@@ -32,7 +69,6 @@
   @include tablet {
     order: 2;
     padding: 2rem 1.5rem;
-    min-height: 0;
     height: 300px;
   }
 }
@@ -42,7 +78,7 @@
   padding: 3rem 2.5rem 2rem;
   background-image: image-set(
     url('/assets/images/optimized/feature-bg.webp') type('image/webp'),
-    url('/assets/images/feature-bg.png') type('image/png')
+    url('/assets/images/feature-bg.png')   type('image/png')
   );
   background-size: cover;
   background-position: center;
@@ -52,7 +88,6 @@
   @include tablet {
     order: 4;
     min-height: 300px;
-    border-radius: $border-radius-xl;
     padding: 0;
   }
 
@@ -87,13 +122,6 @@
     padding: 0.5rem 1.5rem;
     letter-spacing: 0.28em;
   }
-
-  //   @include mobile {
-  //     margin: 0 auto;
-  //     font-size: 0.6875rem;
-  //     padding: 0.4rem 1.25rem;
-  //     letter-spacing: 0.24em;
-  //   }
 }
 
 .feature-content {
@@ -127,49 +155,6 @@
   @include tablet {
     font-size: 1rem;
   }
-  @include mobile {
-    font-size: 0.9375rem;
-  }
-}
-
-.feature-demo-btn-container {
-  position: absolute;
-  bottom: -40px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1;
-  background: $color-white;
-  padding: 1.5rem;
-  border-top-left-radius: $border-radius-xl;
-  border-top-right-radius: $border-radius-xl;
-  @include flex-center;
-  gap: 1rem;
-
-  @include tablet {
-    order: 3;
-    position: static;
-    transform: none;
-    margin: 0 auto;
-    padding: 0.75rem 1rem;
-    border-radius: $border-radius-lg;
-  }
-}
-
-.feature-demo-btn {
-  z-index: 2;
-  @include button-dark;
-  font-weight: 600;
-  align-self: flex-start;
-
-  &:hover {
-    color: #fff;
-  }
-
-  @include tablet {
-    width: 100%;
-    padding: 0.9rem 1rem;
-  }
-
   @include mobile {
     font-size: 0.9375rem;
   }

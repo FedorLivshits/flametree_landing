@@ -79,7 +79,7 @@
           setActive(steps.indexOf(ent.target));
         }
       }),
-    { threshold: 0.6, rootMargin: '0px 0px -40% 0px' }
+    { threshold: 0.2, rootMargin: '0px 0px -40% 0px' }
   );
   steps.forEach((s) => ioDesktop.observe(s));
 

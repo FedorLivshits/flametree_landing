@@ -3,6 +3,20 @@ document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('demoForm');
   const btnSend = form.querySelector('.btn-send');
 
+  /* ----------------- toast ----------------- */
+  function showToast(message, duration = 3000) {
+    const toast = document.getElementById('toast');
+    if (!toast) return;
+
+    toast.textContent = message;
+    toast.classList.add('show');
+
+    // Скрыть через duration мс
+    setTimeout(() => {
+      toast.classList.remove('show');
+    }, duration);
+  }
+
   /* ----------------- modal open / close ----------------- */
   const openModal = () => {
     modal.classList.add('is-open');
@@ -93,12 +107,51 @@ document.addEventListener('DOMContentLoaded', () => {
   form.addEventListener('input', validate);
 
   /* ----------------- form submit ----------------- */
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
     if (!validate()) return;
 
-    // alert('Demo request sent!');
+    // подготовка
+    btnSend.disabled = true;
+    const origText = btnSend.textContent;
+    btnSend.textContent = 'Sending…';
 
-    closeModal();
+    // собираем полезную нагрузку
+    const payload = {
+      firstname: form.firstName.value.trim(),
+      lastname: form.lastName.value.trim(),
+      email: form.email.value.trim(),
+      message: form.message.value.trim(),
+    };
+
+    try {
+      const response = await fetch(
+        'https://portal.flametree.dev.enfint.ai/api/v1/public/book-a-demo',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payload),
+        }
+      );
+
+      if (!response.ok) {
+        // можно парсить JSON-ошибку: await response.json()
+        throw new Error(`Server error ${response.status}`);
+      }
+
+      // при успехе — закрываем и оповещаем пользователя
+      closeModal();
+      // здесь можно показывать нотификацию вместо alert
+      showToast('Your demo request has been sent. Thank you!');
+    } catch (err) {
+      console.error(err);
+      showToast('Oops! Something went wrong. Please try again later.');
+    } finally {
+      // восстанавливаем кнопку
+      btnSend.disabled = false;
+      btnSend.textContent = origText;
+    }
   });
 });

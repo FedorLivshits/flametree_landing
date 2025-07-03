@@ -94,3 +94,30 @@ ul {
   --gradient-color-3: #{$gradient-color-3};
   --gradient-color-4: #{$gradient-color-4};
 }
+
+// Toast
+.toast {
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  transform: translate(-50%, 1rem);
+  max-width: 450px;
+  padding: 1rem 1.5rem;
+  background: rgba(0, 0, 0, 0.9);
+  color: #fff;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transition:
+    opacity 0.3s ease-out,
+    transform 0.3s ease-out;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+  pointer-events: auto;
+}

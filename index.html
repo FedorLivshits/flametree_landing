@@ -55,7 +55,6 @@
             <a href="#use-cases">Solutions</a>
             <a href="#features">About</a>
             <a href="#faq">Resources</a>
-            <a href="#">Prices</a>
           </nav>
 
           <div class="auth-buttons">
@@ -74,7 +73,9 @@
       <div class="mobile-menu-content" onclick="event.stopPropagation()">
         <div class="mobile-menu-header">
           <img src="/assets/images/logo.svg" alt="Logo" />
-          <button class="mobile-menu-close" onclick="closeMobileMenu()">×</button>
+          <button class="mobile-menu-close" onclick="closeMobileMenu()">
+            <img src="/assets/icons/close-icon.svg" alt="" />
+          </button>
         </div>
 
         <nav class="mobile-nav" aria-label="Main">
@@ -82,7 +83,6 @@
           <a href="#use-cases" onclick="closeMobileMenu()">Solutions</a>
           <a href="#features" onclick="closeMobileMenu()">About</a>
           <a href="#faq" onclick="closeMobileMenu()">Resources</a>
-          <a href="#" onclick="closeMobileMenu()">Prices</a>
         </nav>
 
         <div class="mobile-auth-buttons">
@@ -272,11 +272,10 @@
         <!-- Main copy -->
         <div class="difference__center">
           <h2 class="difference__headline">
-            <span class="headline-line" data-accent="orange">
-              Unlike one-way communication tools —
-            </span>
-            <span class="headline-line"> as push notifications, bulk emails </span>
-            <span class="headline-line"> or SMS — </span>
+            <span class="headline-line" data-accent="orange"> Unlike one-way </span>
+            <span class="headline-line" data-accent="orange">communication tools&nbsp;— </span>
+            <span class="headline-line"> as push notifications,&nbsp; </span>
+            <span class="headline-line">bulk emails or SMS&nbsp;— </span>
             <span class="headline-line"> Flametree leverages a </span>
             <span class="headline-line"> two-way conversational approach. </span>
           </h2>
@@ -658,7 +657,6 @@
 
         <!-- правая половина: SVG-маска -->
         <div class="cta-split__right">
-          <!-- можно заменить src на ваш файл -->
           <img src="/assets/images/graphic-element.svg" alt="" class="cta-split__img" />
         </div>
       </div>
@@ -710,9 +708,11 @@
           <a href="#use-cases" onclick="closeMobileMenu()">Solutions</a>
           <a href="#features" onclick="closeMobileMenu()">About</a>
           <a href="#faq" onclick="closeMobileMenu()">Resources</a>
-          <a href="#" onclick="closeMobileMenu()">Prices</a>
         </nav>
-        <p class="foot-copy">© 2025 Flametree Inc. All rights reserved.</p>
+        <p class="foot-copy">© 2025 Flametree. All rights reserved.</p>
+        <p class="foot-copy">
+          Powered by <a href="https://enfint.ai/" target="_blank" class="foot-copy--link">Enfint</a>
+        </p>
       </div>
     </footer>
 
@@ -720,9 +720,12 @@
       <div class="demo-modal__overlay" data-modal-close></div>
 
       <div class="demo-modal__window" role="dialog" aria-modal="true" aria-labelledby="demoTitle">
-        <button class="demo-modal__close" aria-label="Close" data-modal-close>&times;</button>
-
-        <h2 class="demo-modal__title" id="demoTitle">Book a Demo</h2>
+        <div class="demo-modal__header">
+          <h2 class="demo-modal__title" id="demoTitle">Book a Demo</h2>
+          <button class="demo-modal__close" aria-label="Close" data-modal-close>
+            <img src="/assets/icons/close-icon.svg" alt="" />
+          </button>
+        </div>
 
         <form id="demoForm" novalidate>
           <label class="form-field">

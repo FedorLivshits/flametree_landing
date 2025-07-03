@@ -39,8 +39,14 @@
   &__inner {
     @include container(1440px);
     display: grid;
-    grid-template-columns: minmax(500px, 600px) 1fr;
+    /* desktop >1440px — карточка максимум 600px, остальное под картинку */
+    grid-template-columns: minmax(400px, 600px) 1fr;
     column-gap: 4rem;
+
+    /* от 1440px и ниже — две равные колонки */
+    @media (max-width: 1440px) {
+      grid-template-columns: 1fr 1fr;
+    }
 
     /* tablet & mobile → в одну колонку */
     @media (max-width: 1050px) {
@@ -54,7 +60,8 @@
     position: sticky;
     top: calc(var(--header-h, 88px) + 16vh);
     align-self: flex-start;
-    min-height: 436px;
+   min-height: clamp(288px, calc((100vw - 1050px) * ((420 - 288) / (1440 - 1050)) + 288px), 420px);
+  
 
     .screen-img {
       width: 100%;
@@ -62,7 +69,7 @@
       object-fit: contain;
       border-radius: 12px;
       display: block;
-      transition: opacity 0.35s;
+      transition: opacity 0.2s;
       box-shadow: 0 10px 32px rgba(255, 255, 255, 0.15);
     }
 
@@ -89,10 +96,10 @@
       padding-bottom: 1.5rem;
 
       /* === scroll-snap magic === */
-      scroll-snap-type: x mandatory; /* «прилипание» */
-      scroll-padding-inline: 1.5rem; /* учитываем left/right gap */
+      scroll-snap-type: x mandatory;
+      scroll-padding-inline: 1.5rem;
 
-      scrollbar-width: none; /* Firefox */
+      scrollbar-width: none;
       &::-webkit-scrollbar {
         display: none;
       }
@@ -104,7 +111,7 @@
     list-style: none;
     background: #323232;
     border-radius: 14px;
-    min-height: 420px;
+    min-height: clamp(288px, calc((100vw - 1050px) * ((420 - 288) / (1440 - 1050)) + 288px), 420px);
     padding: 2.5rem 2rem;
     display: flex;
     flex-direction: column;
@@ -113,16 +120,14 @@
     opacity: 0.4;
     scale: 0.9;
     transition:
-      opacity 0.35s ease-in-out,
-      scale 0.35s ease-in-out;
+      opacity 0.2s ease-in-out,
+      scale 0.2s ease-in-out;
 
-    /* состояние активной карточки */
     &.is-active {
       opacity: 1;
       scale: 1;
     }
 
-    /* содержание карточки -------------------------------------------------- */
     &__body {
       display: flex;
       flex-direction: column;
@@ -141,7 +146,7 @@
     }
     &__title {
       color: #fff;
-      font-size: 1.25rem;
+      font-size: 1.5rem;
       font-weight: 600;
       line-height: 1.35;
       margin: 0 0 0.5rem;
@@ -158,18 +163,22 @@
       color: #8c8c91;
     }
 
+    @media (max-width: 1170px) {
+      &__title {
+        font-size: 1rem;
+      }
+    }
+
     /* —— mobile tweaks —— */
     @media (max-width: 1050px) {
-      min-height: 240px;
-      min-width: 80%;
+      min-height: 288px;
+      min-width: 85%;
       flex: 0 0 80%;
       padding: 1.5rem 1rem 1.75rem;
-
-      /* scroll-snap на саму карточку */
-      scroll-snap-align: center; /* центр карточки прилипает */
-      scroll-snap-stop: always; /* не «перескакивает» две за раз */
-      opacity: 1; /* «затухание» отключаем */
-      scale: 1; /* и масштаб */
+      scroll-snap-align: center;
+      scroll-snap-stop: always;
+      opacity: 1;
+      scale: 1;
     }
   }
 
@@ -177,7 +186,6 @@
   &__carousel-nav {
     display: none;
 
-    /* отрисовываем только ≤1050px */
     @media (max-width: 1050px) {
       margin-top: 0.5rem;
       display: flex;

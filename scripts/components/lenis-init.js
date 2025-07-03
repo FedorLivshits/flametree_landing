@@ -1,7 +1,12 @@
 import Lenis from 'lenis';
 
 export const lenis = new Lenis({
-  duration: 1.2,
-  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  duration: 0.8,
+  easing: (t) => t * (2 - t),
+  smoothWheel: true,
+  smoothTouch: false,
+  wheelMultiplier: 1.2,
+  touchMultiplier: 2,
+  infinite: false,
   autoRaf: true,
 });
