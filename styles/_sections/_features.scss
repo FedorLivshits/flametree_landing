@@ -41,17 +41,20 @@
     grid-template-columns: 1fr;
     gap: 0.5rem;
 
-    /* на планшете кнопка всё ещё центральная, над швом между блоками */
     .feature-demo-btn-container {
-        bottom: auto;
-      /* теперь не static, а абсолютное позиционирование в гриде */
+      bottom: auto;
       position: absolute;
-      /* кнопка на 50% вниз от верха грид-контейнера */
-      top:  calc( (100% - 0.5rem) / 2 - 0.5rem );
+      top: calc((100% - 0.5rem) / 2 - 0.5rem);
       left: 50%;
       transform: translateX(-50%);
       padding: 0.75rem 1rem;
       border-radius: $border-radius-lg;
+    }
+  }
+
+  @include mobile {
+    .feature-demo-btn-container {
+      top: calc((100% - 0.5rem) / 2 + 2rem);
     }
   }
 }
@@ -78,7 +81,7 @@
   padding: 3rem 2.5rem 2rem;
   background-image: image-set(
     url('/assets/images/optimized/feature-bg.webp') type('image/webp'),
-    url('/assets/images/feature-bg.png')   type('image/png')
+    url('/assets/images/feature-bg.png') type('image/png')
   );
   background-size: cover;
   background-position: center;
