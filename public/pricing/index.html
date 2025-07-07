@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta property="og:title" content="Flametree — AI Agents for Modern Customer Support" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <title>Flametree | AI Customer Engagement Platform</title>
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Commissioner:wght@100..900&family=Space+Grotesk:wght@300..700&display=swap"
+      onload="this.rel='stylesheet'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Commissioner:wght@100..900&family=Space+Grotesk:wght@300..700&display=swap"
+      />
+    </noscript>
+    <link rel="preload" as="image" href="/img/platform-1.png" fetchpriority="high" />
+    <style>
+      body {
+        opacity: 0;
+        transition: opacity 0.5s ease;
+      }
+      html.js-loaded body {
+        opacity: 1;
+      }
+    </style>
+    <noscript>
+      <style>
+        body {
+          opacity: 1 !important;
+        }
+      </style>
+    </noscript>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="container">
+        <div class="header-content">
+          <button class="mobile-menu" onclick="toggleMobileMenu()">
+            <img src="/assets/icons/hamburger.svg" alt="" role="presentation" />
+          </button>
+
+          <a href="#" class="logo">
+            <img src="/assets/images/logo.svg" alt="Logo" />
+          </a>
+
+          <nav class="nav" aria-label="Main">
+            <a href="/pricing">pricing</a>
+            <a href="#features">about</a>
+          </nav>
+
+          <div class="auth-buttons">
+            <a class="login-btn" href="https://portal.flametree.ai/" target="_blank">Login</a>
+            <a class="signup-btn" href="https://portal.flametree.ai/" target="_blank">
+              <span class="signup-text">Sign Up</span>
+              <img class="signup-icon" src="/assets/icons/sign-in.svg" alt="" role="presentation" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" onclick="closeMobileMenu()">
+      <div class="mobile-menu-content" onclick="event.stopPropagation()">
+        <div class="mobile-menu-header">
+          <img src="/assets/images/logo.svg" alt="Logo" />
+          <button class="mobile-menu-close" onclick="closeMobileMenu()">
+            <img src="/assets/icons/close-icon.svg" alt="" />
+          </button>
+        </div>
+
+        <nav class="mobile-nav" aria-label="Main">
+          <a href="/pricing" onclick="closeMobileMenu()">pricing</a>
+          <a href="#features" onclick="closeMobileMenu()">about</a>
+        </nav>
+
+        <div class="mobile-auth-buttons">
+          <a class="login-btn" href="https://portal.flametree.ai/" target="_blank">Login</a>
+          <a class="signup-btn" href="https://portal.flametree.ai/" target="_blank">
+            <span>Sign Up</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== PRICING SECTION ===== -->
+    <main>
+      <section class="pricing">
+        <div class="container-sm">
+          <h1 class="pricing__title">Pricing &amp; Plans</h1>
+
+          <ul class="pricing__cards">
+            <li class="pricing__card">
+              <div class="pricing__card-header">
+                <div class="pricing__card-title">
+                  <h2 class="pricing__plan-name">Playground</h2>
+                  <p class="pricing__price">Free</p>
+                </div>
+                <img src="/assets/icons/price-1.svg" alt="" />
+              </div>
+
+              <ul class="pricing__features">
+                <li><strong>Deployment type:</strong>SaaS</li>
+                <li><strong>Available LLMs:</strong>Qwen, LLama</li>
+                <li>
+                  <strong>Communication channels:</strong>WhatsApp, Telegram, Web, Email, twilio
+                </li>
+                <li><strong>Client sessions:</strong>300 one-time</li>
+                <li><strong>Support:</strong>AI assistant, video tutorial and Email support</li>
+              </ul>
+              <a href="#get-started" class="btn btn-primary pricing__btn">Get started</a>
+            </li>
+
+            <!-- SME -->
+            <li class="pricing__card">
+              <div class="pricing__card-header">
+                <div class="pricing__card-title">
+                  <h2 class="pricing__plan-name">SME</h2>
+                  <p class="pricing__price">150 EUR / month</p>
+                </div>
+                <img src="/assets/icons/price-2.svg" alt="" />
+              </div>
+              <ul class="pricing__features">
+                <li><strong>Deployment type:</strong>SaaS</li>
+                <li>
+                  <strong>Available LLMs:</strong>OpenAI, Qwen, LLama or connect your own LLMs
+                </li>
+                <li>
+                  <strong>Communication channels:</strong>WhatsApp, Telegram, Web, Email, twilio,
+                  CRM, API
+                </li>
+                <li><strong>Client sessions:</strong> 300 one-time</li>
+                <li>
+                  <strong>Support:</strong>AI assistant, video tutorial and Email support, hot line
+                  (5x8)
+                </li>
+                <li><strong>Extra сlient sessions:</strong> 0.5 EUR per session</li>
+              </ul>
+              <a href="#get-started" class="btn btn-primary pricing__btn">Get started</a>
+            </li>
+
+            <!-- Enterprise -->
+            <li class="pricing__card">
+              <div class="pricing__card-header">
+                <div class="pricing__card-title">
+                  <h2 class="pricing__plan-name">Enterprise</h2>
+                  <p class="pricing__price">By request</p>
+                </div>
+                <img src="/assets/icons/price-3.svg" alt="" />
+              </div>
+              <ul class="pricing__features">
+                <li><strong>Deployment type:</strong>SaaS, Private cloud or On-prem</li>
+                <li>
+                  <strong>Available LLMs:</strong>Any public or private deployed LLMs. Cloud or
+                  On-prem installation
+                </li>
+                <li>
+                  <strong>Communication channels:</strong>WhatsApp, Telegram, Web, Email, twilio,
+                  CRM, API, Voice
+                </li>
+                <li><strong>Client sessions:</strong>Unlimited</li>
+                <li><strong>Support:</strong>SLA, Email, hotline</li>
+                <li><strong>Extra сlient sessions:</strong>Unlimited</li>
+              </ul>
+              <a href="#contact-sales" class="btn btn-secondary pricing__btn">Talk to sales</a>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- CTA – Orange Split Section -->
+      <section class="cta-split" id="demo">
+        <div class="cta-split__wrap">
+          <!-- левая белая панель с текстом -->
+          <div class="cta-split__left">
+            <h2 class="cta-split__title">
+              THE FUTURE RUNS<br />
+              ON CONVERSATIONS
+            </h2>
+            <p class="cta-split__lead">
+              Start cutting costs, boosting conversions, and<br />
+              growing revenue — Flametree delivers from<br />
+              day&nbsp;one.
+            </p>
+            <button class="cta-split__btn" data-demo-open>Get a demo</button>
+          </div>
+
+          <!-- правая половина: SVG-маска -->
+          <div class="cta-split__right">
+            <img src="/assets/images/graphic-element.svg" alt="" class="cta-split__img" />
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER
+––––––––––––––––––––––––––––––––––––––––– -->
+    <footer class="site-footer orange-bg">
+      <div class="foot-wrap">
+        <img class="foot-logo" src="/assets/images/logo-white.svg" alt="" />
+        <nav class="foot-nav" aria-label="Main">
+          <a href="#platform" onclick="closeMobileMenu()">Platform</a>
+          <a href="#use-cases" onclick="closeMobileMenu()">Solutions</a>
+          <a href="#features" onclick="closeMobileMenu()">About</a>
+          <a href="#faq" onclick="closeMobileMenu()">Resources</a>
+          <a href="/pricing" onclick="closeMobileMenu()">Pricing</a>
+        </nav>
+        <p class="foot-copy">© 2025 Flametree. All rights reserved.</p>
+        <p class="foot-copy">
+          Powered by <a href="https://enfint.ai/" target="_blank" class="foot-copy--link">Enfint</a>
+        </p>
+      </div>
+    </footer>
+
+    <div class="demo-modal" id="demoModal" aria-hidden="true">
+      <div class="demo-modal__overlay" data-modal-close></div>
+
+      <div class="demo-modal__window" role="dialog" aria-modal="true" aria-labelledby="demoTitle">
+        <div class="demo-modal__header">
+          <h2 class="demo-modal__title" id="demoTitle">Book a Demo</h2>
+          <button class="demo-modal__close" aria-label="Close" data-modal-close>
+            <img src="/assets/icons/close-icon.svg" alt="" />
+          </button>
+        </div>
+
+        <form id="demoForm" novalidate>
+          <label class="form-field">
+            <input type="text" name="firstName" placeholder="First name" maxlength="40" required />
+            <span class="error-msg"></span>
+          </label>
+
+          <label class="form-field">
+            <input type="text" name="lastName" placeholder="Last name" maxlength="40" required />
+            <span class="error-msg"></span>
+          </label>
+
+          <label class="form-field">
+            <input type="email" name="email" placeholder="Business e-mail" required />
+            <span class="error-msg"></span>
+          </label>
+
+          <label class="form-field">
+            <textarea
+              name="message"
+              placeholder="Tell us how can we help you?"
+              maxlength="500"
+            ></textarea>
+            <span class="error-msg"></span>
+          </label>
+          <div class="demo-modal__btns">
+            <button type="submit" class="btn-send" disabled>Send</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="chat-widget" style="width: 0; height: 0"></div>
+    <script type="module" src="/scripts/main.js" defer></script>
+  </body>
+</html>

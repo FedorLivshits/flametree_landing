@@ -1,0 +1,116 @@
+.pricing {
+  margin-top: 88px;
+  padding: 40px 0 80px 0;
+  background: linear-gradient(0deg, rgba(239, 239, 239, 1) 0%, rgba(255, 255, 255, 1) 100%);
+  text-align: center;
+}
+
+.pricing__title {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  line-height: 3rem;
+  font-weight: 500;
+}
+
+.pricing__cards {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 1024px) {
+  .pricing__cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .pricing__cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pricing__card {
+  background: #fff;
+  border-radius: 24px;
+  padding: 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #d6d7e0;
+  justify-content: space-between;
+  max-height: 580px;
+}
+
+.pricing__card-header {
+  margin: 0 -2rem 1.5rem -2rem;
+  padding: 0 2rem 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.pricing__card-title {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.pricing__plan-name {
+  font-size: 1.25rem;
+  line-height: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem;
+}
+
+.pricing__price {
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  color: #5a5c66;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  margin: 0;
+}
+
+.pricing__card-header img {
+  width: 32px;
+  height: 32px;
+}
+
+.pricing__features {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 0.75rem;
+  text-align: left;
+  flex: 1;
+}
+
+.pricing__features li strong {
+  display: block;
+  font-size: 0.6rem;
+  line-height: 1.3;
+  color: #fb8535;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+}
+
+.pricing__features li {
+  margin-bottom: 1rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: #4a4a4a;
+}
+
+.pricing__btn {
+  display: block;
+  margin: 0 auto;
+  padding: 12px 24px;
+  text-align: center;
+  background: #f5f5f5;
+  border-radius: 12px;
+}
+
+.pricing__card + .pricing__card {
+  margin-top: 0;
+}

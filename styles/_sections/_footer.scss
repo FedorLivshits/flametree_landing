@@ -4,7 +4,7 @@
 
 .site-footer {
   background: $color-black;
-  color: #8b8b8d;
+  color: rgba(255, 255, 255, 0.6);
   padding: 4rem 1.5rem 2.5rem;
 }
 
@@ -42,4 +42,8 @@
 .foot-copy--link {
   color: #fff;
   text-decoration: underline;
+}
+
+.orange-bg {
+  background: #ff9509;
 }
