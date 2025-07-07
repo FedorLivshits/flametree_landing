@@ -109,6 +109,10 @@
   text-align: center;
   background: #f5f5f5;
   border-radius: 12px;
+  font: inherit;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #5a5c66;
 }
 
 .pricing__card + .pricing__card {

@@ -1,6 +1,6 @@
-import path from 'path';
-import { defineConfig } from 'vite';
+import path, { resolve } from 'path';
 import { fileURLToPath } from 'url';
+import { defineConfig } from 'vite';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -22,7 +22,11 @@ export default defineConfig({
     sourcemap: false,
     minify: 'esbuild',
     rollupOptions: {
-      input: 'index.html',
+      input: {
+        main: resolve(__dirname, 'index.html'),
+        pricing: resolve(__dirname, 'pricing.html'),
+        about: resolve(__dirname, 'about.html'),
+      },
       output: {
         manualChunks: undefined,
       },
