@@ -38,7 +38,7 @@
   flex-direction: column;
   border: 1px solid #d6d7e0;
   justify-content: space-between;
-  max-height: 580px;
+  max-height: 710px;
 }
 
 .pricing__card-header {
@@ -87,8 +87,8 @@
 
 .pricing__features li strong {
   display: block;
-  font-size: 0.6rem;
-  line-height: 1.3;
+  font-size: 0.75rem;
+  line-height: 1.25rem;
   color: #fb8535;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -97,8 +97,8 @@
 
 .pricing__features li {
   margin-bottom: 1rem;
-  font-size: 0.75rem;
-  line-height: 1rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
   color: #4a4a4a;
 }
 
