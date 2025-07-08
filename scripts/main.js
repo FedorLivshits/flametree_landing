@@ -226,11 +226,13 @@ function initTestimonialsSlider() {
 
 function loadBotWidget() {
   const script = document.createElement('script');
-  script.src = 'https://portal.flametree.ai/public-storage/widget/bot-chat-widget.umd.js';
+  script.src =
+    'https://portal.flametree.dev.enfint.ai/public-storage/widget/bot-chat-widget.umd.js';
   script.async = true;
   script.onload = () => {
     window.BotChatWidget?.createBotChat({
-      botRoute: 'https://portal.flametree.ai/chatbot/ed3987f2-99b7-4c8f-a17d-8aedc5cad81f',
+      botRoute:
+        'https://portal.flametree.dev.enfint.ai/chatbot/1bc67e0b-187b-4ab5-b5a3-8455cb0fecde',
       elementId: 'chat-widget',
       tooltipText: 'Hi there!✋My name is Flame. I’m here to help you anytime!',
       userName: ' ',
@@ -243,11 +245,12 @@ function loadBotWidget() {
       theme: 'light',
       showActionsBtn: false,
       showWaitingMessage: false,
-      authorizationToken: '80ClsFmLhy7HY44ShdR9fYzucY3pOgnZvqoNUFS4aojiJrCDud',
+      authorizationToken: '7B3bCUSDBZ7Z5XIJ5r3q5jQure4kat9ru8wHu5VL3iALB3F2zi',
       voiceOver: false,
       floatingBtnOpennedIconUrl: '',
       floatingBtnClosedIconUrl: '',
-      floatingBtnSize: 58,
+      floatingBtnSize: 72,
+      showFlametreeAnimatedIcon: true,
     });
   };
   script.onerror = () => console.error('Не удалось загрузить виджет');
