@@ -250,7 +250,7 @@ function loadBotWidget() {
       floatingBtnOpennedIconUrl: '',
       floatingBtnClosedIconUrl: '',
       floatingBtnSize: 72,
-      showFlametreeAnimatedIcon: true,
+      flametreeIconVariant: 'animated',
     });
   };
   script.onerror = () => console.error('Не удалось загрузить виджет');
