@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
     toast.textContent = message;
     toast.classList.add('show');
 
-    // Скрыть через duration мс
     setTimeout(() => {
       toast.classList.remove('show');
     }, duration);
@@ -111,12 +110,10 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault();
     if (!validate()) return;
 
-    // подготовка
     btnSend.disabled = true;
     const origText = btnSend.textContent;
     btnSend.textContent = 'Sending…';
 
-    // собираем полезную нагрузку
     const payload = {
       firstname: form.firstName.value.trim(),
       lastname: form.lastName.value.trim(),
@@ -126,7 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     try {
       const response = await fetch(
-        'https://portal.flametree.dev.enfint.ai/api/v1/public/book-a-demo',
+        'https://portal.flametree.ai/api/v1/public/book-a-demo',
         {
           method: 'POST',
           headers: {
@@ -137,19 +134,15 @@ document.addEventListener('DOMContentLoaded', () => {
       );
 
       if (!response.ok) {
-        // можно парсить JSON-ошибку: await response.json()
         throw new Error(`Server error ${response.status}`);
       }
 
-      // при успехе — закрываем и оповещаем пользователя
       closeModal();
-      // здесь можно показывать нотификацию вместо alert
       showToast('Your demo request has been sent. Thank you!');
     } catch (err) {
       console.error(err);
       showToast('Oops! Something went wrong. Please try again later.');
     } finally {
-      // восстанавливаем кнопку
       btnSend.disabled = false;
       btnSend.textContent = origText;
     }
